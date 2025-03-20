@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "LNTrLRAHvEcdSvPhNN8BJ3bom0e6sB5/tgLjYhP3z54=",
+  "Hash": "NEPp1VH5xstMNDOHZt7lbLb8WbKPDqe5yeB5mIID0tc=",
   "Source": "KargoUygulamasiBackEnd",
   "BasePath": "_content/KargoUygulamasiBackEnd",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }
