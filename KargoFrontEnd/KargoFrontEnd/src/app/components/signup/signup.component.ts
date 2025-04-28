@@ -12,6 +12,8 @@ import { AuthService } from '../../services/auth.service';
   standalone:true
 })
 export class SignupComponent {
+  message: string = '';
+  isError:boolean=false;
 
   type: string = "password";
   isText: boolean = false;
@@ -25,7 +27,7 @@ export class SignupComponent {
       firstName:['',Validators.required],
       lastName:['',Validators.required],
       userName:['',Validators.required],
-      email:['',Validators.required],
+      email:['',[Validators.required,Validators.email]],
       password:['',Validators.required],
     });
   }
@@ -37,18 +39,22 @@ export class SignupComponent {
   
   onSignUp()
   {
-    if(this.signUpForm.valid)
-    {
+    if(this.signUpForm.valid){
       this.auth.signup(this.signUpForm.value).subscribe({
         next:(res=>{
+          console.log("Response:",res);
+          this.message=res.message;
+          this.isError=false;
           alert(res.message)
         }),
         error:(err=>{
+          console.log("Error:",err);
+          this.message=err.error?.message || "Signup Failed";
+          this.isError=true;
           alert(err.error.message)
         })
       })
 
-      console.log(this.signUpForm.value)
     }
     else
     {

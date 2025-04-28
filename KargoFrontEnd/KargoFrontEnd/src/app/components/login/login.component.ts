@@ -3,15 +3,16 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup,Validators,ReactiveFormsModule, FormControl } from '@angular/forms';
 import ValidateForm from '../../helpers/validateForm';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrls: ['./login.component.css'],
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule]
- 
+  imports: [ReactiveFormsModule, CommonModule]
 })
+
 export class LoginComponent {
 
   type: string = "password";
@@ -19,10 +20,9 @@ export class LoginComponent {
   eyeIcon: String ="fa-eye-slash";
   loginForm!:FormGroup;
 
-  constructor(private fb: FormBuilder, private auth: AuthService){ }
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router){ }
     
-  ngOnInit():void{
-    this.loginForm=this.fb.group({
+  ngOnInit():void{    this.loginForm=this.fb.group({
       username: ['',Validators.required],
       password: ['',Validators.required]
     })
@@ -33,16 +33,25 @@ export class LoginComponent {
     this.isText ? this.type = "text" : this.type = "password";
   }
 
-  onLogin()
-  {
-    if(this.loginForm.valid)
-    {
+  onLogin() {
+    if(this.loginForm.valid) {
       console.log(this.loginForm.value)
       this.auth.login(this.loginForm.value).subscribe({
         next:(res)=>{
-          alert(res.message)
+          console.log("Response:",res);
+          if(res.user){
+            localStorage.setItem('user',JSON.stringify(res.user));
+            this.router.navigate(['/homepage']);
+
+          }
+          else{
+            console.error('user object is missing');
+            alert('Login successful, but user information is missing.');
+          }
+          
         },
         error:(err)=>{
+          console.error('Error Response:', err);
           alert(err.error.message)
         }
       })
@@ -54,6 +63,9 @@ export class LoginComponent {
       alert("your form is invalid");
     }
   }
-
+  onForgetPassword(){
+    console.log("forgot passowrd page is called");
+    this.router.navigate(['/forgot-password']);
+  }
   
 }

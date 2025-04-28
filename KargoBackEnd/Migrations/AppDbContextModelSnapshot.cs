@@ -44,6 +44,9 @@ namespace KargoUygulamasiBackEnd.Migrations
                     b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Salt")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Token")
                         .HasColumnType("nvarchar(max)");
 

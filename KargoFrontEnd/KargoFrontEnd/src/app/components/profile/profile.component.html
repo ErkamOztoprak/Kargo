@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - ÖğrenciKargo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .profile-header {
+            background: linear-gradient(rgba(40,57,101,.9), rgba(40,57,101,.9));
+            color: white;
+            padding: 2rem 0;
+        }
+        
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 3px solid white;
+        }
+        
+        .rating-stars {
+            color: #ffc107;
+            font-size: 1.2rem;
+        }
+        
+        .nav-tabs .nav-link.active {
+            border-color: #dee2e6 #dee2e6 #fff;
+            color: #284d65;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Profile Header -->
+<header class="profile-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-3 text-center">
+                <img src="https://example.com/avatar.jpg" alt="Profil Fotoğrafı" class="profile-avatar rounded-circle mb-3">
+                <button class="btn btn-light btn-sm">Fotoğrafı Değiştir</button>
+            </div>
+            <div class="col-md-9">
+                <h1>Ahmet Yılmaz</h1>
+                <div class="d-flex align-items-center gap-4">
+                    <div>
+                        <span class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </span>
+                        <span>(128 değerlendirme)</span>
+                    </div>
+                    <span class="badge bg-success">
+                        <i class="fas fa-check-circle me-2"></i>Doğrulanmış Öğrenci
+                    </span>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <div class="bg-white rounded p-3 text-dark">
+                            <div class="fs-5 fw-bold">₺5,430</div>
+                            <small>Toplam Kazanç</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="bg-white rounded p-3 text-dark">
+                            <div class="fs-5 fw-bold">87</div>
+                            <small>Tamamlanan İş</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="bg-white rounded p-3 text-dark">
+                            <div class="fs-5 fw-bold">%98</div>
+                            <small>Olumlu Puan</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Profile Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+    <div class="container">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#activity">Aktivite</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#reviews">Yorumlar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#settings">Ayarlar</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Profile Content -->
+<main class="container my-5">
+    <!-- Activity Tab -->
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="activity">
+            <h3 class="mb-4">Son İşlemler</h3>
+            
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h5>Kitapları Kampüse Taşıma</h5>
+                            <div class="d-flex gap-3 text-muted">
+                                <span><i class="fas fa-calendar me-2"></i>15 Ekim 2023</span>
+                                <span><i class="fas fa-clock me-2"></i>2 saat</span>
+                                <span class="badge bg-success">Tamamlandı</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <div class="fs-4 fw-bold text-primary">₺250</div>
+                            <a href="#" class="btn btn-link">Detayları Gör</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More activity items -->
+        </div>
+
+        <!-- Reviews Tab -->
+        <div class="tab-pane fade" id="reviews">
+            <h3 class="mb-4">Kullanıcı Yorumları</h3>
+            
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex gap-3">
+                        <img src="https://example.com/user1.jpg" alt="Kullanıcı" class="rounded-circle" width="50">
+                        <div class="flex-grow-1">
+                            <div class="d-flex justify-content-between">
+                                <h5>Ayşe Demir</h5>
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            <p class="mb-0">Çok hızlı ve güvenilir bir şekilde teslim etti. Teşekkürler!</p>
+                            <small class="text-muted">3 gün önce</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More reviews -->
+        </div>
+
+        <!-- Settings Tab -->
+        <div class="tab-pane fade" id="settings">
+            <h3 class="mb-4">Profil Ayarları</h3>
+            
+            <form>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Adınız</label>
+                            <input type="text" class="form-control" value="Ahmet">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Soyadınız</label>
+                            <input type="text" class="form-control" value="Yılmaz">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">E-posta</label>
+                            <input type="email" class="form-control" value="ahmet@ornek.com">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Telefon</label>
+                            <input type="tel" class="form-control" value="+90 555 123 45 67">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Şifre Değiştir</label>
+                            <input type="password" class="form-control" placeholder="Yeni şifre">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Biyografi</label>
+                            <textarea class="form-control" rows="3">Kampüs içi kargo taşıma konusunda deneyimli öğrenciyim</textarea>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary">Değişiklikleri Kaydet</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-dark text-light py-4">
+    <div class="container text-center">
+        <p class="mb-0">&copy; 2023 ÖğrenciKargo. Tüm hakları saklıdır.</p>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

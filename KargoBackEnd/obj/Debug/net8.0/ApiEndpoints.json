@@ -1,6 +1,16 @@
 [
   {
     "ContainingType": "KargoUygulamasiBackEnd.Controller.UserController",
+    "Method": "Admin",
+    "RelativePath": "api/User/admin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KargoUygulamasiBackEnd.Controller.UserController",
     "Method": "Authenticate",
     "RelativePath": "api/User/authenticate",
     "HttpMethod": "POST",
@@ -13,6 +23,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KargoUygulamasiBackEnd.Controller.UserController",
+    "Method": "ProtectedEndpoint",
+    "RelativePath": "api/User/protected-endpoint",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -32,22 +52,24 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Program\u002B\u003C\u003Ec__DisplayClass0_0",
-    "Method": "\u003C\u003CMain\u003E$\u003Eb__1",
-    "RelativePath": "weatherforecast",
-    "HttpMethod": "GET",
-    "IsController": false,
+    "ContainingType": "KargoUygulamasiBackEnd.Controller.UserController",
+    "Method": "UpdateRole",
+    "RelativePath": "api/User/update-role/{userId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
+    "Parameters": [
       {
-        "Type": "WeatherForecast[]",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 200
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "newRole",
+        "Type": "System.String",
+        "IsRequired": true
       }
     ],
-    "EndpointName": "GetWeatherForecast"
+    "ReturnTypes": []
   }
 ]

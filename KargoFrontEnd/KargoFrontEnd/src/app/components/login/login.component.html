@@ -1,47 +1,120 @@
-
 <div class="outer">
     <div class="container">
-        <div class="row">
-            <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
-                <div class="panel border bg-white">
-                    <div class="panel-heading">
-                        <h3 class="pt-3 font-weight-bold">
-                           Login 
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-8">
+                <div class="card shadow-lg border-0 mt-5">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="pt-3 font-weight-bold mb-0 text-center">
+                            Giriş Yap
                         </h3>
                     </div>
-                    <div class="panel body p-3">
+                    <div class="card-body p-4">
                         <form [formGroup]="loginForm">
-                            <div class="form-group p-3">
-                                <div class="input-field" [class.error]="loginForm.controls['username'].dirty && loginForm.hasError('required','username')">
-                                    <span class="fa fa-user p-2"></span>
-                                    <input formControlName="username" type="text" placeholder="Username">
-                                </div> 
+                            <!-- Username Input -->
+                            <div class="mb-4">
+                                <div class="input-field">
+                                    <i class="fas fa-user text-primary"></i>
+                                    <input formControlName="username" 
+                                           type="text" 
+                                           class="form-control"
+                                           placeholder="Kullanıcı Adı">
+                                </div>
+                                <small *ngIf="loginForm.controls['username'].dirty && loginForm.hasError('required','username')" 
+                                       class="text-danger">
+                                    *Kullanıcı adı zorunludur
+                                </small>
                             </div>
-                            <small *ngIf="loginForm.controls['username'].dirty && loginForm.hasError('required','username')" class="text-danger">*Username is required</small>
-                            <div class="form-group p-3">
-                                <div class="input-field" [class.error]="loginForm.controls['password'].dirty && loginForm.hasError('required','password')">
-                                    <span class="fa fa-lock p-2"></span>
-                                    <input formControlName="password" [type]="type" placeholder="Password">
-                                    <span (click)="hideShowPass()"class="fa {{eyeIcon}}"></span>
-                                </div> 
+
+                            <!-- Password Input -->
+                            <div class="mb-4">
+                                <div class="input-field">
+                                    <i class="fas fa-lock text-primary"></i>
+                                    <input formControlName="password" 
+                                           [type]="type" 
+                                           class="form-control"
+                                           placeholder="Şifre">
+                                    <i class="fas {{eyeIcon}} text-primary eye-toggle" 
+                                       (click)="hideShowPass()"></i>
+                                </div>
+                                <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')" 
+                                       class="text-danger">
+                                    *Şifre zorunludur
+                                </small>
                             </div>
-                            <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')" class="text-danger">*Password is required</small>
-                            <div class="form-inline fr mt-4">
-                                <a id="forget" class="font-weight-bold">Forget Password ?</a>
+
+                            <!-- Rest of the form remains the same -->
+                            <div class="d-flex justify-content-end mb-4">
+                                <button type="button" 
+                                        class="btn btn-link text-decoration-none p-0" 
+                                        (click)="onForgetPassword()">
+                                    Şifreni mi unuttun?
+                                </button>
                             </div>
-                            <button (click)="onLogin()" type="submit" class="btn btn-primary btn-block mt-4 w-100">Login</button>
-                            <div class="text-center pt-4 text-muted">Dont have account ? <a id="forget" href ="/signup" >Sign Up</a></div>
+
+                            <button (click)="onLogin()" 
+                                    type="submit" 
+                                    class="btn btn-primary btn-lg w-100 mb-3">
+                                Giriş Yap
+                            </button>
+
+                            <div class="text-center pt-3">
+                                <span class="text-muted">Hesabın yok mu? </span>
+                                <a href="/signup" class="text-primary text-decoration-none fw-bold">
+                                    Kayıt Ol
+                                </a>
+                            </div>
                         </form>
                     </div>
-                    <div class="mx-3 my-2 py-2 bordert">
-                        <div class="text-center py-3">
-                            
-                        </div>
-                    </div> 
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>
+
+<style>
+.input-field {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8f9fa;
+    transition: border-color 0.3s ease;
+}
+
+.input-field:hover {
+    border-color: #558ba4;
+}
+
+.input-field i {
+    font-size: 1.1rem;
+    min-width: 25px;
+}
+
+.eye-toggle {
+    cursor: pointer;
+}
+
+.form-control {
+    border: none !important;
+    background: transparent !important;
+    padding: 0;
+    box-shadow: none !important;
+}
+
+.form-control:focus {
+    box-shadow: none !important;
+}
+
+.btn-primary {
+    background-color: #284d65;
+    border-color: #284d65;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #1a3547;
+    border-color: #1a3547;
+}
+</style>

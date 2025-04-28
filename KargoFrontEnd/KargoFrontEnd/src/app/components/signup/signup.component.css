@@ -1,72 +1,50 @@
-.outer{
-    height: 100vh;
-    background:linear-gradient(to top,#ffffff 50%,#558ba4 90%)no-repeat;
-
-}
-.panel-heading{
-    text-align: center;
-    margin-bottom: 10px;
-
-}
-#forget{
-    min-width: 100px;
-    margin-left: auto;
-    text-decoration: none;
-    cursor: pointer;
-
-}
-a.hover{
-    text-decoration: none;
-
-}
-.form-inline label{
-    padding-left:10px;
-    margin:0;
-    cursor: pointer;
-
-}
-.btn{
-    margin-top: 20px;
-    border-radius: 15px;
-
-}
-.panel{
-    min-height: 380px;
-    box-shadow:20px 20px 80px rgb(218,218,218);
-    border-radius:12px;
-    margin-top:50px;
-}
-.input-field{
-    border-radius:5px;
-    padding:5px;
-    display:flex;
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+/* Reuse the same styles from login page */
+.outer {
+    background: linear-gradient(rgba(12, 83, 96, 0.9), rgba(6, 44, 51, 0.9));
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
     align-items: center;
+    justify-content: center;
+}
+
+.card {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.input-field {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8f9fa;
+    transition: border-color 0.3s ease;
+}
+
+.input-field i {
+    font-size: 1.1rem;
+    min-width: 25px;
+}
+
+.eye-toggle {
     cursor: pointer;
-    border:1px solid #ddd;
-    color:#4343ff;
 }
-.input-field.error{
-    border: 1px solid red;
-    color: red;
 
+.btn-primary {
+    background-color: #284d65;
+    border-color: #284d65;
+    transition: all 0.3s ease;
 }
-input[type='text'],
-input[type='password']{
-    border:none ;
-    outline: none;
-    box-shadow:none;
-    width:100%;
-}
-.fa-eye-slash.btn{
-    border:none;
-    outline:none;
-    box-shadow:none;
 
+.btn-primary:hover {
+    background-color: #1a3547;
+    border-color: #1a3547;
 }
-img{
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    border-radius: 50%;
-    position: relative;
+
+.text-primary {
+    color: #284d65 !important;
 }
