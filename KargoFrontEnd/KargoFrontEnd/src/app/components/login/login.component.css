@@ -3,119 +3,80 @@
 
 /* Layout */
 .outer {
-    background: linear-gradient(rgba(12, 83, 96, 0.9), rgba(6, 44, 51, 0.9));
+    background: linear-gradient(rgba(0, 48, 73, 0.9), rgba(0, 48, 73, 0.7));
     background-size: cover;
     min-height: 100vh;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-}
-
-/* Card */
-.card {
+    padding-top: 50px;
+  }
+  
+  /* Card */
+  .card {
+    margin-top: 0 !important;
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-}
-
-/* Input Group */
-.input-group-text {
-    border-radius: 8px 0 0 8px !important;
-}
-
-/* Form Controls */
-.form-control {
-    border: none !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    padding: 0;
-    flex: 1;
-}
-
-.form-control:focus {
-    box-shadow: none !important;
-}
-
-/* Input Field Wrapper */
-.input-field {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card-header {
+    background-color: #003049 !important;
+    color: #eae2b7 !important;
+    padding: 1rem;
+  }
+  
+  /* Input Field */
+  .input-field {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 12px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    background: #f8f9fa;
-    margin-bottom: 15px;
-    transition: border-color 0.3s ease;
-}
-
-.input-field:hover {
-    border-color: #558ba4;
-}
-
-.input-field i {
-    font-size: 1.1rem;
-    min-width: 25px;
-    color: #558ba4;
-}
-
-/* Password Eye Icon */
-.eye-toggle {
-    cursor: pointer;
-    color: #558ba4;
-    padding: 0 10px;
-}
-
-/* Buttons */
-.btn-primary {
-    background-color: #284d65;
-    border-color: #284d65;
-    border-radius: 15px;
-    margin-top: 20px;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.btn-primary:hover {
-    background-color: #1a3547;
-    border-color: #1a3547;
-}
-
-/* Other Styling */
-.panel-heading {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-#forget {
-    min-width: 100px;
-    margin-left: auto;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-a:hover {
-    text-decoration: none;
-}
-
-.form-inline label {
-    padding-left: 10px;
-    margin: 0;
-    cursor: pointer;
-}
-
-/* Image */
-img {
+    padding: 10px 15px;
+    transition: all 0.3s;
+  }
+  
+  .input-field:focus-within {
+    border-color: #fcbf49;
+    box-shadow: 0 0 0 0.2rem rgba(252, 191, 73, 0.25);
+  }
+  
+  .input-field i {
+    color: #003049 !important;
+    margin-right: 10px;
+  }
+  
+  /* Buttons */
+  .btn-primary {
+    background-color: #003049 !important;
+    border-color: #003049 !important;
+    color: #eae2b7 !important;
+  }
+  
+  .btn-primary:hover {
+    background-color: #00263a !important;
+    border-color: #00263a !important;
+  }
+  
+  .btn-link {
+    color: #f77f00 !important;
+  }
+  .logo-large {
+    width: 220px !important;
+    height: auto;
+    margin: 15px 0;
+    filter: brightness(0) invert(1); /* Logoyu beyaza çevir */
+    animation: logoFadeIn 1.2s ease-in-out;
+  }
+  @keyframes logoFadeIn {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  
+  .navbar-logo {
     width: 40px;
-    height: 40px;
-    object-fit: cover;
-    border-radius: 50%;
-    position: relative;
-}
-
-/* Panel */
-.panel {
-    min-height: 380px;
-    box-shadow: 20px 20px 80px rgba(218, 218, 218, 0.6);
-    border-radius: 12px;
-    margin-top: 50px;
-}
+    height: auto;
+    margin-right: 8px;
+    filter: brightness(0) invert(1);
+  }

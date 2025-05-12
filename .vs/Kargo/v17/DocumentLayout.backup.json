@@ -3,28 +3,52 @@
   "WorkspaceRootPath": "D:\\Kargo\\Kargo\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|d:\\kargo\\kargo\\kargobackend\\models\\parcel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|solutionrelative:kargobackend\\models\\parcel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|d:\\kargo\\kargo\\kargobackend\\models\\profileupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|solutionrelative:kargobackend\\models\\profileupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|d:\\kargo\\kargo\\kargobackend\\controller\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|solutionrelative:kargobackend\\controller\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|d:\\kargo\\kargo\\kargobackend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|solutionrelative:kargobackend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|d:\\kargo\\kargo\\kargobackend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|solutionrelative:kargobackend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|d:\\kargo\\kargo\\kargobackend\\helpers\\passwordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|solutionrelative:kargobackend\\helpers\\passwordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|d:\\kargo\\kargo\\kargobackend\\models\\loginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|solutionrelative:kargobackend\\models\\loginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|d:\\kargo\\kargo\\kargobackend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|solutionrelative:kargobackend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|d:\\kargo\\kargo\\kargobackend\\kargouygulamasibackend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|solutionrelative:kargobackend\\kargouygulamasibackend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|d:\\kargo\\kargo\\kargobackend\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|solutionrelative:kargobackend\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|d:\\kargo\\kargo\\kargobackend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|solutionrelative:kargobackend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|d:\\kargo\\kargo\\kargobackend\\models\\registerrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|solutionrelative:kargobackend\\models\\registerrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|d:\\kargo\\kargo\\kargobackend\\models\\authenticateresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|solutionrelative:kargobackend\\models\\authenticateresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|d:\\kargo\\kargo\\kargobackend\\models\\loguser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|solutionrelative:kargobackend\\models\\loguser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|d:\\kargo\\kargo\\kargobackend\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|solutionrelative:kargobackend\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|d:\\kargo\\kargo\\kargobackend\\helpers\\passwordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38099313-29BD-1394-C653-F44D270B8DC9}|KargoBackEnd\\KargoUygulamasiBackEnd.csproj|solutionrelative:kargobackend\\helpers\\passwordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -33,35 +57,9 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "DockedWidth": 182,
+          "SelectedChildIndex": 5,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "D:\\Kargo\\Kargo\\KargoBackEnd\\Controller\\UserController.cs",
-              "RelativeDocumentMoniker": "KargoBackEnd\\Controller\\UserController.cs",
-              "ToolTip": "D:\\Kargo\\Kargo\\KargoBackEnd\\Controller\\UserController.cs",
-              "RelativeToolTip": "KargoBackEnd\\Controller\\UserController.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAASwDMAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T15:42:15.165Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Kargo\\Kargo\\KargoBackEnd\\appsettings.json",
-              "RelativeDocumentMoniker": "KargoBackEnd\\appsettings.json",
-              "ToolTip": "D:\\Kargo\\Kargo\\KargoBackEnd\\appsettings.json",
-              "RelativeToolTip": "KargoBackEnd\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-04-28T02:05:13.777Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 4,
@@ -70,48 +68,152 @@
               "RelativeDocumentMoniker": "KargoBackEnd\\Models\\User.cs",
               "ToolTip": "D:\\Kargo\\Kargo\\KargoBackEnd\\Models\\User.cs",
               "RelativeToolTip": "KargoBackEnd\\Models\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-28T01:47:41.339Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PasswordHasher.cs",
-              "DocumentMoniker": "D:\\Kargo\\Kargo\\KargoBackEnd\\Helpers\\PasswordHasher.cs",
-              "RelativeDocumentMoniker": "KargoBackEnd\\Helpers\\PasswordHasher.cs",
-              "ToolTip": "D:\\Kargo\\Kargo\\KargoBackEnd\\Helpers\\PasswordHasher.cs",
-              "RelativeToolTip": "KargoBackEnd\\Helpers\\PasswordHasher.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T18:55:19.415Z",
+              "WhenOpened": "2025-05-02T15:52:07.21Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "ProfileUpdateDto.cs",
+              "DocumentMoniker": "D:\\Kargo\\Kargo\\KargoBackEnd\\Models\\ProfileUpdateDto.cs",
+              "RelativeDocumentMoniker": "KargoBackEnd\\Models\\ProfileUpdateDto.cs",
+              "ToolTip": "D:\\Kargo\\Kargo\\KargoBackEnd\\Models\\ProfileUpdateDto.cs",
+              "RelativeToolTip": "KargoBackEnd\\Models\\ProfileUpdateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T22:38:55.351Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\Kargo\\Kargo\\KargoBackEnd\\Controller\\UserController.cs",
+              "RelativeDocumentMoniker": "KargoBackEnd\\Controller\\UserController.cs",
+              "ToolTip": "D:\\Kargo\\Kargo\\KargoBackEnd\\Controller\\UserController.cs",
+              "RelativeToolTip": "KargoBackEnd\\Controller\\UserController.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAAAGkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T15:05:58.113Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LoginRequestDto.cs",
+              "DocumentMoniker": "D:\\Kargo\\Kargo\\KargoBackEnd\\Models\\LoginRequestDto.cs",
+              "RelativeDocumentMoniker": "KargoBackEnd\\Models\\LoginRequestDto.cs",
+              "ToolTip": "D:\\Kargo\\Kargo\\KargoBackEnd\\Models\\LoginRequestDto.cs",
+              "RelativeToolTip": "KargoBackEnd\\Models\\LoginRequestDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T16:02:00.062Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Notification.cs",
+              "DocumentMoniker": "D:\\Kargo\\Kargo\\KargoBackEnd\\Models\\Notification.cs",
+              "RelativeDocumentMoniker": "KargoBackEnd\\Models\\Notification.cs",
+              "ToolTip": "D:\\Kargo\\Kargo\\KargoBackEnd\\Models\\Notification.cs",
+              "RelativeToolTip": "KargoBackEnd\\Models\\Notification.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T19:42:56.006Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Parcel.cs",
+              "DocumentMoniker": "D:\\Kargo\\Kargo\\KargoBackEnd\\Models\\Parcel.cs",
+              "RelativeDocumentMoniker": "KargoBackEnd\\Models\\Parcel.cs",
+              "ToolTip": "D:\\Kargo\\Kargo\\KargoBackEnd\\Models\\Parcel.cs",
+              "RelativeToolTip": "KargoBackEnd\\Models\\Parcel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T19:26:27.356Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AuthenticateResponseDto.cs",
+              "DocumentMoniker": "D:\\Kargo\\Kargo\\KargoBackEnd\\Models\\AuthenticateResponseDto.cs",
+              "RelativeDocumentMoniker": "KargoBackEnd\\Models\\AuthenticateResponseDto.cs",
+              "ToolTip": "D:\\Kargo\\Kargo\\KargoBackEnd\\Models\\AuthenticateResponseDto.cs",
+              "RelativeToolTip": "KargoBackEnd\\Models\\AuthenticateResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T14:36:37.399Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "RegisterRequestDto.cs",
+              "DocumentMoniker": "D:\\Kargo\\Kargo\\KargoBackEnd\\Models\\RegisterRequestDto.cs",
+              "RelativeDocumentMoniker": "KargoBackEnd\\Models\\RegisterRequestDto.cs",
+              "ToolTip": "D:\\Kargo\\Kargo\\KargoBackEnd\\Models\\RegisterRequestDto.cs",
+              "RelativeToolTip": "KargoBackEnd\\Models\\RegisterRequestDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T18:37:41.413Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Kargo\\Kargo\\KargoBackEnd\\Program.cs",
               "RelativeDocumentMoniker": "KargoBackEnd\\Program.cs",
               "ToolTip": "D:\\Kargo\\Kargo\\KargoBackEnd\\Program.cs",
               "RelativeToolTip": "KargoBackEnd\\Program.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-19T15:38:33.961Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "KargoUygulamasiBackEnd.csproj",
-              "DocumentMoniker": "D:\\Kargo\\Kargo\\KargoBackEnd\\KargoUygulamasiBackEnd.csproj",
-              "RelativeDocumentMoniker": "KargoBackEnd\\KargoUygulamasiBackEnd.csproj",
-              "ToolTip": "D:\\Kargo\\Kargo\\KargoBackEnd\\KargoUygulamasiBackEnd.csproj",
-              "RelativeToolTip": "KargoBackEnd\\KargoUygulamasiBackEnd.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-19T15:30:07.379Z"
+              "DocumentIndex": 10,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "D:\\Kargo\\Kargo\\KargoBackEnd\\Context\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "KargoBackEnd\\Context\\AppDbContext.cs",
+              "ToolTip": "D:\\Kargo\\Kargo\\KargoBackEnd\\Context\\AppDbContext.cs",
+              "RelativeToolTip": "KargoBackEnd\\Context\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T01:14:51.871Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "LogUser.cs",
+              "DocumentMoniker": "D:\\Kargo\\Kargo\\KargoBackEnd\\Models\\LogUser.cs",
+              "RelativeDocumentMoniker": "KargoBackEnd\\Models\\LogUser.cs",
+              "ToolTip": "D:\\Kargo\\Kargo\\KargoBackEnd\\Models\\LogUser.cs",
+              "RelativeToolTip": "KargoBackEnd\\Models\\LogUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T20:14:22.25Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "PasswordHasher.cs",
+              "DocumentMoniker": "D:\\Kargo\\Kargo\\KargoBackEnd\\Helpers\\PasswordHasher.cs",
+              "RelativeDocumentMoniker": "KargoBackEnd\\Helpers\\PasswordHasher.cs",
+              "ToolTip": "D:\\Kargo\\Kargo\\KargoBackEnd\\Helpers\\PasswordHasher.cs",
+              "RelativeToolTip": "KargoBackEnd\\Helpers\\PasswordHasher.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvxwAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T18:55:19.415Z"
             }
           ]
         }

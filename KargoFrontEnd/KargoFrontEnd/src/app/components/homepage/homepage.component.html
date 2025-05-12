@@ -44,59 +44,67 @@
 <!-- Navigation with Dropdown -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
     <div class="container">
-        <a class="navbar-brand text-primary fw-bold" href="#">ÖğrenciKargo</a>
+        <a class="navbar-brand text-custom-primary fw-bold" href="#">
+            <img [src]="logoPath" alt="logo" class="navbar-logo me-2">
+            
+        </a>
         <div class="d-flex align-items-center gap-3">
             <!-- Existing Buttons -->
-            <a href="#owner" class="btn btn-outline-primary">Yardım Lazım</a>
-            <a href="#helper" class="btn btn-primary">Yardım Edebilirim</a>
-            <!-- Profile Dropdown -->
-            <div class="dropdown">
-                <a class="btn btn-link text-dark text-decoration-none dropdown-toggle" 
-                   href="#" role="button" data-bs-toggle="dropdown">
-                    <i class="fas fa-user-circle me-2"></i>
-                    {{userName}}
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="/profil">
-                        <i class="fas fa-user me-2"></i>Profilim
-                    </a></li>
-                    <li><a class="dropdown-item" href="/ayarlar">
-                        <i class="fas fa-cog me-2"></i>Ayarlar
-                    </a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item text-danger" href="/cikis">
-                        <i class="fas fa-sign-out-alt me-2"></i>Çıkış Yap
-                    </a></li>
-                </ul>
+            <a href="#owner" class="btn btn-outline-primary text-light">Yardım Lazım</a>
+            <a href="#helper" class="btn btn-primary text-light">Yardım Edebilirim</a>
+            <div *ngIf="userName; else guest">
+                <!-- Profile Dropdown -->
+                <div class="dropdown">
+                    <a class="btn btn-link text-light text-decoration-none dropdown-toggle" 
+                    href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-user-circle me-2"></i>
+                        {{userName}}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="/profile">
+                            <i class="fas fa-user me-2"></i>Profilim
+                        </a></li>
+                        <li><a class="dropdown-item" href="/ayarlar">
+                            <i class="fas fa-cog me-2"></i>Ayarlar
+                        </a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="/cikis" (click)="logout()">
+                            <i class="fas fa-sign-out-alt me-2"></i>Çıkış Yap
+                        </a></li>
+                    </ul>
+                </div>
             </div>
-            
+            <ng-template #guest>
+                <a routerLink="/login" class="btn btn-outline-primary">Giriş Yap</a>
+                <a routerLink="/signup" class="btn btn-outline-primary">Kaydol</a>  
+            </ng-template>
         </div>
     </div>
 </nav>
 
 <!-- Hero Section -->
-<section class="hero-section">
+<section class="hero-section bg-custom-primary">
     <div class="container text-center">
-        <h1 class="display-4 mb-4">Kampüs Kargo Yardım Ağı</h1>
-        <p class="lead mb-4">Kargo ihtiyaçlarınız için doğrulanmış öğrenci yardımcılarla buluşun</p>
+        <h1 class="display-4 mb-4 fw-bold">Yurtify, Kargo Hizmetiniz</h1>
+        <p class="lead mb-4">Kargo ihtiyaçlarınız için  öğrenci yardımcılarla buluşun</p>
         <div class="row g-4 justify-content-center">
             <div class="col-md-5">
                 <div class="card role-card h-100">
                     <div class="card-body">
-                        <i class="fas fa-box-open fa-3x text-primary mb-3"></i>
+                        <i class="fas fa-box-open fa-3x text-custom-primary mb-3"></i>
                         <h3>Kargo Sahipleri</h3>
                         <p>Güvenilir öğrencilerle kargo ihtiyaçlarınızı çözün</p>
-                        <button class="btn btn-primary w-100">Talep Oluştur</button>
+                        <a routerLink="/cargo-request-create"class="btn btn-primary w-100">Talep Oluştur</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-5">
                 <div class="card role-card h-100">
                     <div class="card-body">
-                        <i class="fas fa-hands-helping fa-3x text-success mb-3"></i>
+                        <i class="fas fa-hands-helping fa-3x text-custom-primary mb-3"></i>
                         <h3>Öğrenci Yardımcılar</h3>
                         <p>Kampüs içi kargo taşıyarak para kazanın</p>
-                        <button class="btn btn-success w-100">Yardımcı Ol</button>
+                        <button class="btn btn-primary w-100">Yardımcı Ol</button>
                     </div>
                 </div>
             </div>
@@ -110,21 +118,21 @@
         <h2 class="text-center mb-5">Nasıl Çalışır?</h2>
         <div class="row g-4">
             <div class="col-md-4 text-center">
-                <div class="bg-primary text-white rounded-circle p-4 d-inline-block mb-3">
+                <div class="bg-custom-primary text-white rounded-circle p-4 d-inline-block mb-3">
                     <i class="fas fa-edit fa-2x"></i>
                 </div>
                 <h4>1. İsteğini Gönder</h4>
                 <p>Kargo ihtiyacını anlat ve bütçeni belirle</p>
             </div>
             <div class="col-md-4 text-center">
-                <div class="bg-success text-white rounded-circle p-4 d-inline-block mb-3">
+                <div class="bg-custom-secondary text-white rounded-circle p-4 d-inline-block mb-3">
                     <i class="fas fa-users fa-2x"></i>
                 </div>
                 <h4>2. Yardımcılarla Eşleş</h4>
                 <p>Doğrulanmış öğrenciler teklif verecek</p>
             </div>
             <div class="col-md-4 text-center">
-                <div class="bg-warning text-white rounded-circle p-4 d-inline-block mb-3">
+                <div class="bg-custom-warning text-white rounded-circle p-4 d-inline-block mb-3">
                     <i class="fas fa-check-circle fa-2x"></i>
                 </div>
                 <h4>3. Teslimatı Tamamla</h4>
@@ -144,7 +152,7 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3">
-                            <span class="badge bg-primary">Küçük Paket</span>
+                            <span class="badge bg-custom-primary">Küçük Paket</span>
                             <span class="text-muted">₺200-₺300</span>
                         </div>
                         <h5>Ders kitaplarını kampüse taşıma</h5>
@@ -169,7 +177,7 @@
 </section>
 
 <!-- Neden Biz? -->
-<section class="py-5 bg-primary text-white">
+<section class="py-5 bg-custom-primary text-white">
     <div class="container">
         <div class="row g-4">
             <div class="col-md-4 text-center">

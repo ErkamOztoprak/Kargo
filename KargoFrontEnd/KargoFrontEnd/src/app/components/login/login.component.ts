@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup,Validators,ReactiveFormsModule, FormControl } fr
 import ValidateForm from '../../helpers/validateForm';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router'; 
+import {HttpClient,HttpHeaders} from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent {
   isText: boolean = false;
   eyeIcon: String ="fa-eye-slash";
   loginForm!:FormGroup;
+  logoPath = 'assets/images/logo.png'
 
   constructor(private fb: FormBuilder, private auth: AuthService, private router: Router){ }
     
@@ -38,14 +40,26 @@ export class LoginComponent {
       console.log(this.loginForm.value)
       this.auth.login(this.loginForm.value).subscribe({
         next:(res)=>{
-          console.log("Response:",res);
-          if(res.user){
-            localStorage.setItem('user',JSON.stringify(res.user));
-            this.router.navigate(['/homepage']);
+          console.log('Response:',res);
 
+          if(res && res.token){
+            console.log('Attempting to save token:', res.token);
+            this.auth.storeToken(res.token);
+            console.log('Token should be saved now. Current token from service:', this.auth.getToken()); // Kayıttan sonra token'ı kontrol et
+
+            
+            if(res.userName&&res.email){
+              const user = {
+                userName: res.userName,
+                email: res.email,
+                
+              };
+              localStorage.setItem('user', JSON.stringify(user));
+            }
+            this.router.navigate(['/homepage']);
           }
           else{
-            console.error('user object is missing');
+            console.error('User information is missing in the response');
             alert('Login successful, but user information is missing.');
           }
           

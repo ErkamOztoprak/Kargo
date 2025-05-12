@@ -1,6 +1,7 @@
 ﻿using KargoBackEnd.Context;
 using KargoBackEnd.Models;
 using KargoUygulamasiBackEnd.Helpers;
+using KargoUygulamasiBackEnd.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -30,9 +31,114 @@ namespace KargoUygulamasiBackEnd.Controller
             _configuration = configuration;
         }
 
-        [HttpPost("authenticate")]//login
-        public async Task<IActionResult> Authenticate([FromBody] User userObj)
+        [Authorize]
+        [HttpGet("profile")]
+        public async Task<IActionResult> GetUserProfile()
         {
+
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                return Unauthorized(new { Message = "User ID not found in token" });
+            }
+
+            if (!int.TryParse(userIdClaim.Value, out int userId))
+            {
+                return BadRequest(new { Message = "Invalid User ID" });
+            }
+
+            var user = await _authContext.Users
+                .Include(u => u.Notification) 
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                return NotFound(new { Message = "User not found" });
+            }
+
+            var userProfile = new
+            {
+                
+                user.FirstName,
+                user.LastName,
+                user.UserName,
+                user.Email,
+                user.PhoneNumber,
+                user.ProfilePicture,
+                user.Rating,
+                user.IsVerified,
+                
+            };
+
+            return Ok(userProfile);
+        }
+        [Authorize]
+        [HttpPut("profile/update")]
+        public async Task<IActionResult> UpdateUserProfile([FromBody] ProfileUpdateDto profileUpdateDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userIdClaim))
+                return Unauthorized(new { Message = "User ID not found in token" });
+
+            if (!int.TryParse(userIdClaim, out int userIdNum))
+                return BadRequest(new { Message = "Invalid User ID" });
+
+            var user = await _authContext.Users.FirstOrDefaultAsync(u => u.Id == userIdNum);
+
+            if (user == null)
+                return NotFound(new { Message = "User not found" });
+
+            if (profileUpdateDto.FirstName == null &&
+                profileUpdateDto.LastName == null &&
+                profileUpdateDto.Email == null &&
+                profileUpdateDto.PhoneNumber == null)
+            {
+                return BadRequest(new { Message = "At least one field must be provided for update." });
+            }
+            user.FirstName = profileUpdateDto.FirstName ?? user.FirstName;
+            user.LastName = profileUpdateDto.LastName ?? user.LastName;
+            user.PhoneNumber = profileUpdateDto.PhoneNumber ?? user.PhoneNumber;
+
+
+            if (!string.IsNullOrEmpty(profileUpdateDto.Email) && !string.Equals(user.Email, profileUpdateDto.Email, StringComparison.OrdinalIgnoreCase))
+            {
+                var existingUser = await _authContext.Users.AnyAsync(u => u.Email == profileUpdateDto.Email && u.Id != userIdNum);
+                if (existingUser)
+                    return BadRequest(new { Message = "Email already exists" });
+
+                user.Email = profileUpdateDto.Email;
+            }
+
+            user.UpdatedAt = DateTime.UtcNow;
+
+            try
+            {
+                _authContext.Users.Update(user);
+                await _authContext.SaveChangesAsync();
+                return Ok(new { Message = "Profile updated successfully",User = user });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating profile: {ex.Message}");
+                return StatusCode(500, new { Message = "An error occurred while updating the profile" });
+            }
+            
+
+        }
+        private async Task<bool> UserExists(int id)
+        {
+            return await _authContext.Users.AnyAsync(e => e.Id == id);
+        }
+
+        [HttpPost("authenticate")]//login
+        public async Task<IActionResult> Authenticate([FromBody] LoginRequestDto userObj)
+        {
+            Console.WriteLine($"Received User Data: {System.Text.Json.JsonSerializer.Serialize(userObj)}");
+
             if (userObj == null || string.IsNullOrEmpty(userObj.UserName) || string.IsNullOrEmpty(userObj.Password))
                 return BadRequest(new { Message = "Invalid request" });
 
@@ -45,16 +151,18 @@ namespace KargoUygulamasiBackEnd.Controller
 
                 var jwtToken = GenerateJwtToken(user);
 
+                user.LastLogin = DateTime.UtcNow;
+                _authContext.Users.Update(user);
+                await _authContext.SaveChangesAsync();
+
                 return Ok(new AuthenticateResponseDto
                 {
                     Token = jwtToken,
                     ExpiresIn = int.Parse(_configuration["Jwt:ExpiresInMinutes"]) * 60,
-                    message = "Login successful!",
                     UserName = user.UserName,
                     Email = user.Email,
                     Role = user.Role
-
-
+                    
 
                 });
             }
@@ -95,15 +203,6 @@ namespace KargoUygulamasiBackEnd.Controller
 
             return tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
         }
-        public class AuthenticateResponseDto
-        {
-            public string Token { get; set; }
-            public int ExpiresIn { get; set; }
-            public string message { get; set; }
-            public string UserName { get; set; } // New field
-            public string Email { get; set; }    // New field
-            public string Role { get; set; }
-        }
         public class ApiResponseDto
         {
             public string Message { get; set; }
@@ -111,33 +210,43 @@ namespace KargoUygulamasiBackEnd.Controller
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterUser([FromBody] User userobj)
+        public async Task<IActionResult> RegisterUser([FromBody] RegisterRequestDto request)
         {
-            if (userobj == null)
+            if (request == null)
                 return BadRequest("User Data is Required");
 
-            if (string.IsNullOrEmpty(userobj.Email) || string.IsNullOrEmpty(userobj.Password))
+            if (string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.Password))
                 return BadRequest("Email and Password is Required");
 
-            if (await _authContext.Users.AnyAsync(x => x.Email == userobj.Email))
+            if (await _authContext.Users.AnyAsync(x => x.Email == request.Email))
                 return BadRequest("Email is Already Exist");
 
-            if(!IsPasswordValid(userobj.Password))
+            if(!IsPasswordValid(request.Password))
                 return BadRequest("Password is Not Strong Enough"); 
 
             string salt;
-            userobj.Password = _passwordHasher.Hash(userobj.Password,out salt);
-            userobj.Salt = salt;
+            request.Password = _passwordHasher.Hash(request.Password,out salt);
 
-            if (string.IsNullOrEmpty(userobj.Role))
+            var user = new User
             {
-                userobj.Role = "User";
-            }
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                UserName = request.UserName,
+                Email = request.Email,
+                PhoneNumber = request.PhoneNumber,
+                Password = request.Password,
+                Salt = salt,
+                Role = "User",
+                Status = UserStatus.Active,
+                IsVerified = false,
+                CreatedAt = DateTime.UtcNow,
+                Rating = 3.0,
+            }; 
 
-            await _authContext.Users.AddAsync(userobj);
+            await _authContext.Users.AddAsync(user);
             await _authContext.SaveChangesAsync();
 
-            return Ok(new { Message = "User Login Successfully ", userobj.Password, userobj.Salt });
+            return Ok(new { Message = "User Registered Successfully " });
 
         }
 
@@ -164,6 +273,7 @@ namespace KargoUygulamasiBackEnd.Controller
         {
             return Ok(new { Message = "Admin access granted" });
         }
+
         private bool IsPasswordValid(string password)
         {
             if (string.IsNullOrWhiteSpace(password))
@@ -187,6 +297,25 @@ namespace KargoUygulamasiBackEnd.Controller
         {
             return Ok(new { Message = "This is a protected endpoint" });
         }
+        [Authorize(Roles = "Admin")]
+        [HttpPut("update-isverified/{userId}")]
+        public async Task<IActionResult> UpdateIsVerified(int userId, [FromBody] bool isVerified)
+        {
+            
+            var user = await _authContext.Users.FindAsync(userId);
+            if (user == null)
+            {
+                return NotFound(new { Message = "User not found" });
+            }
+
+            
+            user.IsVerified = isVerified;
+            _authContext.Users.Update(user);
+            await _authContext.SaveChangesAsync();
+
+            return Ok(new { Message = "User verification status updated successfully", IsVerified = user.IsVerified });
+        }
+
     }
 }
 

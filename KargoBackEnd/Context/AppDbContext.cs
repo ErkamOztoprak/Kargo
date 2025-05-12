@@ -18,6 +18,14 @@ namespace KargoBackEnd.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("users");
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.DeliveryLogs)
+                .WithOne(d => d.ConfirmedBy)
+                .HasForeignKey(d => d.ConfirmedByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

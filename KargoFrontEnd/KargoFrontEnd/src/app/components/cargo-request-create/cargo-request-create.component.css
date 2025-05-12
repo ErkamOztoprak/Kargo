@@ -1,0 +1,114 @@
+/* Genel sayfa ve kart teması */
+.cargo-form-theme .card {
+  background-color: #003a59; /* Koyu tema kart arkaplanı */
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  color: var(--light, #f8f9fa); /* Kart içindeki varsayılan metin rengi */
+}
+
+.cargo-form-theme .card-header {
+  background-color: #00263a; /* Kart başlığı için biraz daha koyu arkaplan */
+  color: var(--light, #f8f9fa);
+  border-radius: 10px 10px 0 0;
+  border-bottom: none;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.cargo-form-theme .card-header .card-title {
+  color: var(--light, #f8f9fa);
+  font-size: 1.5rem; /* Başlık fontunu biraz büyüttük */
+}
+
+.cargo-form-theme .card-body {
+  padding: 2rem; /* İçeriğe biraz daha fazla padding */
+}
+
+/* Bölüm başlıkları (Gönderici Bilgileri, Alıcı Bilgileri vb.) */
+.cargo-form-theme .section-title {
+  color: var(--info, #ffc107); /* Temanızdaki info rengi veya parlak bir renk */
+  border-bottom: 1px solid rgba(var(--info-rgb, 252, 191, 73), 0.3); /* Info renginin alpha'lı hali */
+  padding-bottom: 0.75rem;
+  margin-top: 1rem;
+  margin-bottom: 1.75rem !important;
+  font-size: 1.25rem;
+}
+
+/* Form etiketleri */
+.cargo-form-theme .form-label {
+  color: var(--light, #f8f9fa);
+  font-weight: 500;
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+}
+
+/* Form inputları, textarea ve select kutuları */
+.cargo-form-theme .form-control,
+.cargo-form-theme .form-select {
+  background-color: rgba(255, 255, 255, 0.95); /* Koyu arkaplan üzerinde açık renkli input */
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #003049; /* Input içindeki metin rengi (koyu) */
+  border-radius: 0.375rem; /* Bootstrap varsayılanı */
+  padding: 0.5rem 0.75rem; /* Padding ayarı */
+}
+
+.cargo-form-theme .form-control::placeholder {
+  color: rgba(0, 48, 73, 0.5); /* Placeholder metin rengi */
+}
+
+.cargo-form-theme .form-control:focus,
+.cargo-form-theme .form-select:focus {
+  border-color: var(--info, #ffc107);
+  box-shadow: 0 0 0 0.25rem rgba(var(--info-rgb, 252, 191, 73), 0.25);
+  background-color: #ffffff; /* Focus durumunda tam beyaz */
+}
+
+/* Radio button etiketleri */
+.cargo-form-theme .form-check-label {
+  color: var(--light, #f8f9fa);
+  padding-left: 0.25rem;
+}
+
+/* Radio button inputları */
+.cargo-form-theme .form-check-input {
+  background-color: rgba(255, 255, 255, 0.25); /* Seçili değilken arkaplan */
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.cargo-form-theme .form-check-input:checked {
+  background-color: var(--info, #ffc107);
+  border-color: var(--info, #ffc107);
+}
+
+.cargo-form-theme .form-check-input:focus {
+  box-shadow: 0 0 0 0.25rem rgba(var(--info-rgb, 252, 191, 73), 0.25);
+}
+
+/* Butonlar */
+.cargo-form-theme .btn-primary {
+  background-color: var(--warning, #ff9800); /* Temanızdaki warning rengi */
+  border-color: var(--warning, #ff9800);
+  color: #000000; /* Koyu metin, warning rengiyle daha iyi kontrast için */
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+.cargo-form-theme .btn-primary:hover {
+  background-color: var(--warning-dark, #e68900); /* Warning renginin biraz koyusu */
+  border-color: var(--warning-dark, #e68900);
+  color: #000000;
+}
+
+.cargo-form-theme .btn-primary:disabled {
+  background-color: rgba(var(--warning-rgb, 255, 152, 0), 0.5);
+  border-color: rgba(var(--warning-rgb, 255, 152, 0), 0.5);
+  color: rgba(0,0,0, 0.5);
+}
+
+/* Hata mesajları */
+.cargo-form-theme .text-danger {
+  color: #ff8a80 !important; /* Koyu tema üzerinde daha okunaklı bir kırmızı */
+  font-size: 0.875em;
+}

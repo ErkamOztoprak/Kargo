@@ -2,49 +2,45 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8">
-                <div class="card shadow-lg border-0 mt-5">
-                    <div class="card-header bg-primary text-white">
+                <div class="text-center mb-4 ">
+                    <img [src]="logoPath" alt="Logo" class="logo-large">
+                </div>
+                <div class="card shadow-lg border-0 ">
+                    
+                    <div class="card-header bg-custom-primary text-white">
                         <h3 class="pt-3 font-weight-bold mb-0 text-center">Kayıt Ol</h3>
                     </div>
-                    <div class="card-body p-4">
+                    <div class="card-body ">
                         <form [formGroup]="signUpForm">
-                            <!-- First Name -->
-                            <div class="mb-3">
-                                <div class="input-field">
-                                    <i class="fas fa-user text-primary"></i>
-                                    <input formControlName="firstName" type="text" 
-                                           class="form-control" placeholder="Ad">
+                            <!-- Ad ve Soyad yan yana -->
+                            <div class="row mb-3">
+                                <!-- First Name -->
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <i class="fas fa-user text-custom-primary"></i>
+                                        <input formControlName="firstName" type="text" 
+                                               class="form-control" placeholder="Ad">
+                                    </div>
+                                    <small *ngIf="signUpForm.controls['firstName'].dirty && signUpForm.hasError('required','firstName')"
+                                           class="text-danger">*Ad zorunludur</small>
                                 </div>
-                                <small *ngIf="signUpForm.controls['firstName'].dirty && signUpForm.hasError('required','firstName')"
-                                       class="text-danger">*Ad zorunludur</small>
+
+                                <!-- Last Name -->
+                                <div class="col-md-6">
+                                    <div class="input-field">
+                                        <i class="fas fa-user text-custom-primary"></i>
+                                        <input formControlName="lastName" type="text" 
+                                               class="form-control" placeholder="Soyad">
+                                    </div>
+                                    <small *ngIf="signUpForm.controls['lastName'].dirty && signUpForm.hasError('required','lastName')"
+                                           class="text-danger">*Soyad zorunludur</small>
+                                </div>
                             </div>
 
-                            <!-- Last Name -->
+                            <!-- Username field below -->
                             <div class="mb-3">
                                 <div class="input-field">
-                                    <i class="fas fa-user text-primary"></i>
-                                    <input formControlName="lastName" type="text" 
-                                           class="form-control" placeholder="Soyad">
-                                </div>
-                                <small *ngIf="signUpForm.controls['lastName'].dirty && signUpForm.hasError('required','lastName')"
-                                       class="text-danger">*Soyad zorunludur</small>
-                            </div>
-
-                            <!-- Email -->
-                            <div class="mb-3">
-                                <div class="input-field">
-                                    <i class="fas fa-envelope text-primary"></i>
-                                    <input formControlName="email" type="email" 
-                                           class="form-control" placeholder="E-posta">
-                                </div>
-                                <small *ngIf="signUpForm.controls['email'].dirty && signUpForm.hasError('required','email')"
-                                       class="text-danger">*E-posta zorunludur</small>
-                            </div>
-
-                            <!-- Username -->
-                            <div class="mb-3">
-                                <div class="input-field">
-                                    <i class="fas fa-at text-primary"></i>
+                                    <i class="fas fa-user-circle text-custom-primary"></i>
                                     <input formControlName="userName" type="text" 
                                            class="form-control" placeholder="Kullanıcı Adı">
                                 </div>
@@ -52,17 +48,53 @@
                                        class="text-danger">*Kullanıcı adı zorunludur</small>
                             </div>
 
-                            <!-- Password -->
-                            <div class="mb-4">
+                            <!-- Email -->
+                            <div class="mb-3">
                                 <div class="input-field">
-                                    <i class="fas fa-lock text-primary"></i>
+                                    <i class="fas fa-envelope text-custom-primary"></i>
+                                    <input formControlName="email" type="email" 
+                                           class="form-control" placeholder="E-posta">
+                                </div>
+                                <small *ngIf="signUpForm.controls['email'].dirty && signUpForm.hasError('required','email')"
+                                       class="text-danger">*E-posta zorunludur</small>
+                            </div>
+                            <!-- Telefon Numarası (YENİ) -->
+                            <div class="mb-3">
+                                <div class="input-field">
+                                    <i class="fas fa-phone text-custom-primary"></i>
+                                    <input formControlName="phoneNumber" type="tel" 
+                                        class="form-control" placeholder="Telefon Numarası">
+                                </div>
+                                <small *ngIf="signUpForm.controls['phoneNumber'].dirty && signUpForm.hasError('required','phoneNumber')"
+                                    class="text-danger">*Telefon numarası zorunludur</small>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="mb-3">
+                                <div class="input-field">
+                                    <i class="fas fa-lock text-custom-primary"></i>
                                     <input [type]="type" formControlName="password" 
                                            class="form-control" placeholder="Şifre">
-                                    <i class="fas {{eyeIcon}} text-primary eye-toggle" 
+                                    <i class="fas {{eyeIcon}} text-custom-primary eye-toggle" 
                                        (click)="hideShowPass()"></i>
                                 </div>
                                 <small *ngIf="signUpForm.controls['password'].dirty && signUpForm.hasError('required','password')"
                                        class="text-danger">*Şifre zorunludur</small>
+                            </div>
+                            <!-- Password Confirmation - YENİ -->
+                            <div class="mb-3">
+                                <div class="input-field">
+                                    <i class="fas fa-lock text-custom-primary"></i>
+                                    <input [type]="type" formControlName="confirmPassword" 
+                                            class="form-control" placeholder="Şifreyi Tekrar Girin">
+                                    <i class="fas {{eyeIcon}} text-custom-primary eye-toggle" 
+                                        (click)="hideShowPass()"></i>
+                                </div>
+                                <small *ngIf="signUpForm.controls['confirmPassword'].dirty && signUpForm.hasError('required','confirmPassword')"
+                                        class="text-danger">*Şifre tekrarı zorunludur</small>
+                                <small *ngIf="signUpForm.hasError('passwordMismatch')" class="text-danger">
+                                    *Şifreler eşleşmiyor
+                                </small>
                             </div>
 
                             <button type="button" 
@@ -71,7 +103,7 @@
                             
                             <div class="text-center pt-4">
                                 <span class="text-muted">Zaten hesabınız var mı? </span>
-                                <a href="/login" class="text-primary text-decoration-none fw-bold">Giriş Yap</a>
+                                <a routerLink="/login" class="text-custom-primary text-decoration-none fw-bold">Giriş Yap</a>
                             </div>
                         </form>
                     </div>

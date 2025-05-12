@@ -1,50 +1,348 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
-/* Reuse the same styles from login page */
+
+/* Ana Layout Stilleri */
 .outer {
-    background: linear-gradient(rgba(12, 83, 96, 0.9), rgba(6, 44, 51, 0.9));
-    background-size: cover;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background: linear-gradient(rgba(0, 48, 73, 0.9), rgba(0, 48, 73, 0.7));
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
-.card {
-    border-radius: 15px;
-    overflow: hidden;
+.panel-heading {
+  text-align: center;
+  margin-bottom: 10px;
 }
 
+#forget {
+  min-width: 100px;
+  margin-left: auto;
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--info);
+}
+
+a:hover {
+  text-decoration: underline !important;
+}
+
+.form-inline label {
+  padding-left: 10px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.btn {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border-radius: 15px;
+}
+
+.panel {
+  min-height: 380px;
+  box-shadow: 20px 20px 80px rgb(218, 218, 218);
+  border-radius: 12px;
+  margin-top: 100px;
+}
+
+/* Input alanlarının tutarlı olmasını sağla */
 .input-field {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 8px 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: #f8f9fa;
-    transition: border-color 0.3s ease;
+  position: relative;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  padding: 10px 12px;
+  margin-bottom: 5px;
+  background-color: #fff;
+  height: 46px; /* Tüm input alanları için sabit yükseklik */
+  display: flex;
+  align-items: center;
 }
 
-.input-field i {
-    font-size: 1.1rem;
-    min-width: 25px;
+.input-field.error {
+  border: 1px solid red;
+  color: red;
 }
 
+/* İkon stili */
+.input-field i:not(.eye-toggle) {
+  margin-right: 10px;
+  width: 20px; /* Sabit genişlik */
+  text-align: center;
+  font-size: 16px; /* Tutarlı büyüklük */
+  color: var(--primary) !important; /* Tutarlı renk */
+}
+
+/* Input kontrolü stili */
+.input-field .form-control {
+  border: none;
+  background: transparent;
+  padding: 0;
+  height: 24px; /* Sabit yükseklik */
+  line-height: 24px;
+  margin: 0;
+  outline: none;
+  box-shadow: none;
+  flex: 1;
+  width: 100%;
+}
+/* Form grupları arasında tutarlı boşluk */
+.mb-3 {
+  margin-bottom: 16px !important; /* Her zaman 16px boşluk */
+}
+
+/* Row içindeki sütunlar için özel ayar */
+.row.mb-3 {
+  margin-bottom: 16px !important; /* Diğer form elemanlarıyla aynı */
+}
+
+/* Son form grubunun altındaki boşluğu kaldır */
+form > div:last-of-type:not(.text-center) {
+  margin-bottom: 24px !important;
+}
+
+/* Row içindeki col'ların margin ayarı */
+.row .col-md-6 .input-field {
+  height: 46px; /* Row içindeki alanlar için sabit yükseklik */
+}
+
+/* Row içindeki kolonlar için padding ayarı */
+.row > [class*="col-"] {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+/* Göz ikonu konumu */
 .eye-toggle {
-    cursor: pointer;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--primary) !important;
+}
+/* Hata mesajı için tutarlı stil */
+small.text-danger {
+  display: block;
+  font-size: 12px;
+  margin-top: 4px;
+  margin-bottom: 0;
+  padding-left: 2px;
+  line-height: 1.2;
 }
 
-.btn-primary {
-    background-color: #284d65;
-    border-color: #284d65;
-    transition: all 0.3s ease;
+input[type='text'],
+input[type='password'],
+input[type='email'],
+select {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  width: 100%;
 }
 
-.btn-primary:hover {
-    background-color: #1a3547;
-    border-color: #1a3547;
+.fa-eye-slash.btn {
+  border: none;
+  outline: none;
+  box-shadow: none;
 }
 
-.text-primary {
-    color: #284d65 !important;
+img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  position: relative;
+}
+
+/* Validation mesajı stili */
+small.text-danger {
+  font-size: 12px;
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+/* Form Card Stilleri - Signup için genişletilmiş */
+.card {
+  margin-top: 0 !important;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.card-body {
+  padding: 24px !important;
+}
+
+.card-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 25px;
+}
+
+/* Signup Form İçin Özel Stiller */
+.form-group {
+  margin-bottom: 20px;
+  
+}
+
+.signup-form label {
+  color: var(--primary);
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.fa-info-circle {
+  color: var(--info);
+  margin-left: 5px;
+  cursor: help;
+}
+
+/* Validation Stilleri */
+.validation-error {
+  color: var(--secondary);
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
+
+.form-control.is-invalid {
+  border-color: var(--secondary);
+  background-image: none;
+}
+
+/* İki Sütunlu Alan İçin */
+.row-cols-2 {
+  display: flex;
+  gap: 15px;
+}
+
+.row-cols-2 > div {
+  flex: 1;
+}
+
+/* Logo ve Marka Stilleri */
+.logo-large {
+  width: 150px; 
+  height: auto;
+  margin-bottom: 15px;
+  filter: brightness(0) invert(1); /* Logoyu beyaza çevir */
+  animation: logoFadeIn 1.2s ease-in-out;
+}
+
+@keyframes logoFadeIn {
+  0% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.navbar-logo {
+  width: 40px;
+  height: auto;
+  margin-right: 8px;
+  filter: brightness(0) invert(1);
+}
+
+/* Buton Stilleri */
+.btn-primary, .btn-warning {
+  background-color: var(--warning);
+  border-color: var(--warning);
+  border-radius: 15px;
+  padding: 10px;
+  margin-top: 15px;
+  font-weight: 500;
+}
+
+.btn-warning:hover, .btn-primary:hover {
+  background-color: #e67300 !important;
+  border-color: #e67300 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-outline-primary {
+  color: var(--info) !important;
+  border-color: var(--info) !important;
+  background-color: transparent;
+  padding: 10px 30px;
+  font-weight: 600;
+}
+
+.btn-outline-primary:hover {
+  color: var(--primary) !important;
+  background-color: var(--info) !important;
+}
+
+/* Checkbox ve Radio Stilleri */
+.form-check-input:checked {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.form-check-label {
+  cursor: pointer;
+}
+
+/* Zaten Hesabın Var Mı? Linki */
+.signup-link {
+  text-align: center;
+  margin-top: 20px;
+  color: var(--light);
+}
+
+.signup-link a {
+  color: var(--info);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+/* Link stillerini düzelt */
+.text-custom-warning {
+  color: var(--warning) !important;
+}
+
+/* Ad-Soyad satırındaki kolonlar arası boşluk düzeltme */
+.row {
+  margin-left: -8px; 
+  margin-right: -8px;
+}
+
+.row > [class*="col-"] {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+/* Son form elemanının alt boşluğu */
+form > div:last-of-type:not(.text-center) {
+  margin-bottom: 24px !important;
+}
+
+/* Responsive Ayarlar */
+@media (max-width: 768px) {
+  .card {
+    padding: 15px;
+  }
+  
+  .row-cols-2 {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .card {
+    margin: 0;
+  }
+  
+  .logo-large {
+    width: 100px;
+  }
 }

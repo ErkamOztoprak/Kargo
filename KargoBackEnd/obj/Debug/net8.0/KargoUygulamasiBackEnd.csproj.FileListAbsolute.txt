@@ -453,7 +453,6 @@ D:\Kargo\Kargo\KargoBackEnd\obj\Debug\net8.0\staticwebassets\msbuild.build.Kargo
 D:\Kargo\Kargo\KargoBackEnd\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.KargoUygulamasiBackEnd.props
 D:\Kargo\Kargo\KargoBackEnd\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.KargoUygulamasiBackEnd.props
 D:\Kargo\Kargo\KargoBackEnd\obj\Debug\net8.0\staticwebassets.pack.json
-D:\Kargo\Kargo\KargoBackEnd\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\Kargo\Kargo\KargoBackEnd\obj\Debug\net8.0\KargoUyg.BFC87603.Up2Date
 D:\Kargo\Kargo\KargoBackEnd\obj\Debug\net8.0\KargoUygulamasiBackEnd.dll
 D:\Kargo\Kargo\KargoBackEnd\obj\Debug\net8.0\refint\KargoUygulamasiBackEnd.dll
@@ -461,3 +460,4 @@ D:\Kargo\Kargo\KargoBackEnd\obj\Debug\net8.0\KargoUygulamasiBackEnd.pdb
 D:\Kargo\Kargo\KargoBackEnd\obj\Debug\net8.0\KargoUygulamasiBackEnd.genruntimeconfig.cache
 D:\Kargo\Kargo\KargoBackEnd\obj\Debug\net8.0\ref\KargoUygulamasiBackEnd.dll
 D:\Kargo\Kargo\KargoBackEnd\bin\Debug\net8.0\Microsoft.Bcl.Memory.dll
+D:\Kargo\Kargo\KargoBackEnd\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

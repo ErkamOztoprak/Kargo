@@ -19,7 +19,33 @@
     "Parameters": [
       {
         "Name": "userObj",
-        "Type": "KargoBackEnd.Models.User",
+        "Type": "KargoUygulamasiBackEnd.Models.LoginRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KargoUygulamasiBackEnd.Controller.UserController",
+    "Method": "GetUserProfile",
+    "RelativePath": "api/User/profile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KargoUygulamasiBackEnd.Controller.UserController",
+    "Method": "UpdateUserProfile",
+    "RelativePath": "api/User/profile/update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "profileUpdateDto",
+        "Type": "KargoUygulamasiBackEnd.Models.ProfileUpdateDto",
         "IsRequired": true
       }
     ],
@@ -44,8 +70,29 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userobj",
-        "Type": "KargoBackEnd.Models.User",
+        "Name": "request",
+        "Type": "KargoUygulamasiBackEnd.Models.RegisterRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KargoUygulamasiBackEnd.Controller.UserController",
+    "Method": "UpdateIsVerified",
+    "RelativePath": "api/User/update-isverified/{userId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "isVerified",
+        "Type": "System.Boolean",
         "IsRequired": true
       }
     ],

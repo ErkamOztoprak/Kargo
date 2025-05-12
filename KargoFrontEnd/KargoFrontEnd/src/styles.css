@@ -1,2 +1,52 @@
+
 /* You can add global styles to this file, and also import other style files */
 @import url(assets/css/common.css);
+@import './assets/styles/_shared.scss';
+
+:root {
+  --primary: #003049;
+  --secondary: #d62828;
+  --warning: #f77f00;
+  --info: #fcbf49;
+  --light: #eae2b7;
+  --dark: #003049;
+
+  /* Updated color variables */
+  
+  /* --primary: #042A2B;
+  --secondary: #5EB1BF;
+  --warning: #EF7B45;
+  --danger: #D84727;
+  --info: #5EB1BF;
+  --light: #CDEDF6;
+  --dark: #1d3557; */
+  }
+  .bg-success, .btn-success, .text-success, 
+.alert-success, .border-success,
+.badge-success, .progress-bar-success {
+  background-color: #003049 !important;
+  border-color: #003049 !important;
+  color: #eae2b7 !important;
+}
+
+.text-success {
+  color: #fcbf49 !important;
+  background-color: transparent !important;
+}
+
+.table-success, .table-success > td, .table-success > th {
+  background-color: rgba(0, 48, 73, 0.2) !important;
+}
+ /* Bootstrap renk sınıflarını ezmek için */
+.bg-custom-primary { background-color: var(--primary) !important; }
+.bg-custom-secondary { background-color: var(--secondary) !important; }
+.bg-custom-warning { background-color: var(--warning) !important; }
+.bg-custom-info { background-color: var(--info) !important; }
+.bg-custom-light { background-color: var(--light) !important; }
+
+.text-custom-primary { color: var(--primary) !important; }
+.text-custom-secondary { color: var(--secondary) !important; }
+.text-custom-warning { color: var(--warning) !important; }
+.text-custom-info { color: var(--info) !important; }
+.text-custom-light { color: var(--light) !important; }
+
