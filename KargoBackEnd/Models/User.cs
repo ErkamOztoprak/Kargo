@@ -54,9 +54,15 @@ namespace KargoBackEnd.Models
 
         public double Rating { get; set; }
 
-        public ICollection<DeliveryLog> DeliveryLogs { get; set; }
-        public ICollection<Notification> Notification { get; set; }
-        public ICollection<LogUser> LogUser { get; set; }
+        public virtual ICollection<DeliveryLog> DeliveryLogs { get; set; } = new HashSet<DeliveryLog>();
+        public virtual ICollection<Notification> Notification { get; set; } = new HashSet<Notification>();
+        public virtual ICollection<LogUser> LogUser { get; set; } = new HashSet<LogUser>();
+
+        public virtual ICollection<Parcel> RequestedParcels { get; set; } = new HashSet<Parcel>();
+        public virtual ICollection<Parcel> AssignedParcelsToDeliver { get; set; } = new HashSet<Parcel>();
+
+
+
 
     }
 

@@ -20,29 +20,15 @@
                 <div class="mt-0">
                     <button class="btn btn-light btn-sm">Fotoğrafı Değiştir</button>
                 </div>
+                
             </div>
             <div class="col-md-9">
                 <h1>{{userName}}</h1>
                 <div class="d-flex align-items-center gap-4">
-                    <div>
-                        <span class="rating-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </span>
-                        <span>(128 değerlendirme)</span>
-                    </div>
-                    
                     <span class="badge bg-custom-warning" *ngIf="isVerified">
                         <i class="fas fa-check-circle me-2"></i>Doğrulanmış Öğrenci
                     </span>
-                    <div> <!-- Sağ taraf (Çıkış Yap Butonu) -->
-                        <button class="btn btn-danger btn-sm" (click)="logout()">
-                            <i class="fas fa-sign-out-alt me-1"></i>Çıkış Yap
-                        </button>
-                    </div>
+                    
                 </div>
                 
                 
@@ -78,17 +64,21 @@
             <li class="nav-item">
                 <a class="nav-link" [class.active]="activeTab === 'activity'" (click)="setActiveTab('activity')">Aktivite</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" [class.active]="activeTab === 'reviews'" (click)="setActiveTab('reviews')">Yorumlar</a>
-            </li>
+            
             <li class="nav-item">
                 <a class="nav-link" [class.active]="activeTab === 'settings'" (click)="setActiveTab('settings')">Ayarlar</a>
             </li>
         </ul>
+        <div> <!-- Sağ taraf (Çıkış Yap Butonu) -->
+                        <button class="btn btn-danger btn-sm" (click)="logout()">
+                            <i class="fas fa-sign-out-alt me-1"></i>Çıkış Yap
+                        </button>
+                    </div>
     </div>
 </nav>
 
 <!-- Profile Content -->
+
 <main class="container my-5">
     <!-- Tab content -->
     <div class="tab-content">
@@ -96,199 +86,188 @@
             <h4 class="mb-4">Aktivite Geçmişi</h4>
             
             <!-- Devam Eden İşler -->
-            <h5 class="border-bottom pb-2">Devam Eden İşler</h5>
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h5 class="card-title">Kütüphane'den Öğrenci Yurduna</h5>
-                            <p class="card-text text-muted mb-1">
-                                <i class="fas fa-map-marker-alt me-1"></i> Mesafe: 1.2 km
-                            </p>
-                            <p class="card-text mb-0">
-                                <small>Başlangıç: 10 Mayıs, 14:30</small>
-                            </p>
-                        </div>
-                        <div class="text-end">
-                            <span class="badge bg-custom-primary mb-2">Devam Ediyor</span>
-                            <p class="card-text fw-bold">₺25</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+             <h5 class="border-bottom pb-2 mb-3"><i class="fas fa-truck-loading me-2"></i>Devam Eden Teslimatlarım</h5>
             
-            <!-- Tamamlanan İşler -->
-            <h5 class="border-bottom pb-2 mt-5">Tamamlanan İşler</h5>
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h5 class="card-title">Teknoloji Marketinden Teslim Alma</h5>
-                            <p class="card-text text-muted mb-1">
-                                <i class="fas fa-map-marker-alt me-1"></i> Mesafe: 0.8 km
-                            </p>
-                            <p class="card-text mb-0">
-                                <small>Tamamlanma: 8 Mayıs, 11:15</small>
-                            </p>
+            <div *ngIf="isLoadingAcceptedParcels" class="text-center my-3">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Teslimatlarınız yükleniyor...</span>
+                </div>
+                <p class="mt-2">Teslimatlarınız yükleniyor...</p>
+            </div>
+        
+            <div *ngIf="acceptedParcelsError && !isLoadingAcceptedParcels" class="alert alert-danger my-3">
+                <i class="fas fa-exclamation-triangle me-2"></i>{{ acceptedParcelsError }}
+            </div>
+        
+            <div *ngIf="!isLoadingAcceptedParcels && !acceptedParcelsError && myAcceptedParcels.length === 0" class="alert alert-info my-3">
+                <i class="fas fa-info-circle me-2"></i>Şu anda devam eden bir teslimatınız bulunmamaktadır.
+                <p class="mt-2 mb-0">Yeni teslimat görevleri almak için <a routerLink="/">ana sayfadaki</a> açık kargo taleplerine göz atabilirsiniz.</p>
+            </div>
+        
+            <div *ngIf="!isLoadingAcceptedParcels && !acceptedParcelsError && myAcceptedParcels.length > 0">
+                <div class="list-group">
+                    <div *ngFor="let parcel of myAcceptedParcels" class="list-group-item list-group-item-action flex-column align-items-start mb-3 shadow-sm rounded">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1 fw-bold text-primary">{{ parcel.cargoDescription || 'Açıklama Yok' }}</h6>
+                            <small>Durum: <span class="badge bg-warning text-dark">{{ parcel.status }}</span></small>
                         </div>
-                        <div class="text-end">
-                            <span class="badge bg-custom-warning mb-2">Tamamlandı</span>
-                            <p class="card-text fw-bold">₺35</p>
+                        <p class="mb-1">
+                            <i class="fas fa-map-marker-alt text-danger me-1"></i><strong>Alım:</strong> {{ parcel.cargoPickupLocation || 'Belirtilmemiş' }} <br>
+                            <i class="fas fa-map-pin text-success me-1"></i><strong>Teslimat:</strong> {{ parcel.cargoDeliveryLocation || 'Belirtilmemiş' }}
+                        </p>
+                        <p class="mb-1" *ngIf="parcel.senderName">
+                            <i class="fas fa-user me-1"></i><strong>Gönderen:</strong> {{ parcel.senderName }}
+                             <span *ngIf="parcel.senderContactInfo">({{ parcel.senderContactInfo }})</span>
+                        </p>
+                         <p class="mb-1" *ngIf="parcel.receiverName">
+                            <i class="fas fa-user-tag me-1"></i><strong>Alıcı:</strong> {{ parcel.receiverName }}
+                             <span *ngIf="parcel.receiverContactInfo">({{ parcel.receiverContactInfo }})</span>
+                        </p>
+                        <p class="mb-1" *ngIf="parcel.paymentProposedFee != null">
+                            <i class="fas fa-coins me-1"></i><strong>Taşıma Ücreti:</strong> {{ parcel.paymentProposedFee | currency:'TRY':'symbol' }}
+                        </p>
+                        <small class="text-muted" *ngIf="parcel.createdAt"><i class="far fa-calendar-alt me-1"></i>Talep Tarihi: {{ parcel.createdAt | date:'dd/MM/yyyy HH:mm' }}</small>
+                        
+                        <div class="mt-3 d-flex justify-content-end">
+                            <button class="btn btn-sm btn-success" (click)="markAsDelivered(parcel.id)">
+                                <i class="fas fa-check-double me-1"></i> Teslim Ettim
+                            </button>
+                            <!-- <button class="btn btn-sm btn-outline-info me-2">Detayları Gör</button> -->
                         </div>
                     </div>
                 </div>
             </div>
+            <hr class="my-4"> <!-- Dinamik listenin altına bir ayırıcı -->
             
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h5 class="card-title">Kampüs Kantininden Kargo Teslimi</h5>
-                            <p class="card-text text-muted mb-1">
-                                <i class="fas fa-map-marker-alt me-1"></i> Mesafe: 0.5 km
-                            </p>
-                            <p class="card-text mb-0">
-                                <small>Tamamlanma: 5 Mayıs, 16:45</small>
-                            </p>
-                        </div>
-                        <div class="text-end">
-                            <span class="badge bg-custom-warning mb-2">Tamamlandı</span>
-                            <p class="card-text fw-bold">₺20</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <!-- Tamamlanan İşler (Dinamik Hale Getirildi) -->
+            <h5 class="border-bottom pb-2 mt-5"><i class="fas fa-check-circle me-2"></i>Tamamlanan İşlerim</h5>
 
-        <div class="tab-pane fade" [class.show]="activeTab === 'reviews'" [class.active]="activeTab === 'reviews'">
-            <h4 class="mb-4">Değerlendirmeler</h4>
-            
-            <!-- Değerlendirme İstatistikleri -->
-            <div class="row mb-4">
-                <div class="col-md-4">
-                    <div class="d-flex align-items-center">
-                        <div class="display-4 me-3">4.8</div>
-                        <div>
-                            <div class="rating-stars fs-4">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <p class="mb-0">128 değerlendirme</p>
-                        </div>
-                    </div>
+            <div *ngIf="isLoadingCompletedParcels" class="text-center my-3">
+                <div class="spinner-border text-success" role="status"> <!-- Renk değişti -->
+                    <span class="visually-hidden">Tamamlanan işleriniz yükleniyor...</span>
                 </div>
-                <div class="col-md-8">
-                    <div class="row mb-2 align-items-center">
-                        <div class="col-2">5 yıldız</div>
-                        <div class="col-8">
-                            <div class="progress" style="height: 10px;">
-                                <div class="progress-bar bg-custom-info" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div class="col-2">85%</div>
-                    </div>
-                    <div class="row mb-2 align-items-center">
-                        <div class="col-2">4 yıldız</div>
-                        <div class="col-8">
-                            <div class="progress" style="height: 10px;">
-                                <div class="progress-bar bg-custom-info" role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div class="col-2">10%</div>
-                    </div>
-                    <div class="row mb-2 align-items-center">
-                        <div class="col-2">3 yıldız</div>
-                        <div class="col-8">
-                            <div class="progress" style="height: 10px;">
-                                <div class="progress-bar bg-custom-info" role="progressbar" style="width: 3%;" aria-valuenow="3" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div class="col-2">3%</div>
-                    </div>
-                    <div class="row mb-2 align-items-center">
-                        <div class="col-2">2 yıldız</div>
-                        <div class="col-8">
-                            <div class="progress" style="height: 10px;">
-                                <div class="progress-bar bg-custom-info" role="progressbar" style="width: 1%;" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div class="col-2">1%</div>
-                    </div>
-                    <div class="row align-items-center">
-                        <div class="col-2">1 yıldız</div>
-                        <div class="col-8">
-                            <div class="progress" style="height: 10px;">
-                                <div class="progress-bar bg-custom-info" role="progressbar" style="width: 1%;" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div class="col-2">1%</div>
-                    </div>
-                </div>
+                <p class="mt-2">Tamamlanan işleriniz yükleniyor...</p>
             </div>
-            
-            <!-- Yorumlar Listesi -->
-            <div class="border-bottom pb-3 mb-4">
-                <div class="d-flex mb-3">
-                    <img src="assets/images/avatar1.jpg" alt="Avatar" class="rounded-circle me-3" width="60" height="60">
-                    <div>
-                        <h6 class="mb-1">Ayşe Yılmaz</h6>
-                        <div class="rating-stars mb-1">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="mb-1">Kargom çok hızlı ve güvenli bir şekilde geldi. Çok teşekkürler!</p>
-                        <small class="text-muted">2 gün önce</small>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="border-bottom pb-3 mb-4">
-                <div class="d-flex mb-3">
-                    <img src="assets/images/avatar2.jpg" alt="Avatar" class="rounded-circle me-3" width="60" height="60">
-                    <div>
-                        <h6 class="mb-1">Mehmet Kaya</h6>
-                        <div class="rating-stars mb-1">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <p class="mb-1">Zamanında teslimat için teşekkürler. Tek sorun kargonun biraz ıslanmış olmasıydı ama içindekilere bir şey olmamıştı.</p>
-                        <small class="text-muted">1 hafta önce</small>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="border-bottom pb-3 mb-4">
-                <div class="d-flex mb-3">
-                    <img src="assets/images/avatar3.jpg" alt="Avatar" class="rounded-circle me-3" width="60" height="60">
-                    <div>
-                        <h6 class="mb-1">Zeynep Demir</h6>
-                        <div class="rating-stars mb-1">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="mb-1">Müthiş bir hizmet! Çok teşekkürler, tam istediğim gibi oldu.</p>
-                        <small class="text-muted">2 hafta önce</small>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-4">
-                <button class="btn btn-custom-outline-primary">Daha Fazla Göster</button>
-            </div>
-        </div>
 
+            <div *ngIf="completedParcelsError && !isLoadingCompletedParcels" class="alert alert-danger my-3">
+                <i class="fas fa-exclamation-triangle me-2"></i>{{ completedParcelsError }}
+            </div>
+
+            <div *ngIf="!isLoadingCompletedParcels && !completedParcelsError && myCompletedParcels.length === 0" class="alert alert-secondary my-3"> <!-- Renk değişti -->
+                <i class="fas fa-history me-2"></i>Henüz tamamlanmış bir teslimatınız bulunmamaktadır.
+            </div>
+
+            <div *ngIf="!isLoadingCompletedParcels && !completedParcelsError && myCompletedParcels.length > 0">
+                <div class="list-group">
+                    <div *ngFor="let parcel of myCompletedParcels" class="list-group-item list-group-item-action flex-column align-items-start mb-3 shadow-sm rounded border-success"> <!-- Kenarlık eklendi -->
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1 fw-bold text-success">{{ parcel.cargoDescription || 'Açıklama Yok' }}</h6> <!-- Renk değişti -->
+                            <small>Durum: 
+                                <span class="badge" [ngClass]="{
+                                    'bg-success text-white': parcel.status === 'Delivered', 
+                                    'bg-danger text-white': parcel.status === 'Cancelled', 
+                                    'bg-secondary text-white': parcel.status !== 'Delivered' && parcel.status !== 'Cancelled'
+                                }">
+                                    {{ parcel.status === 'Delivered' ? 'Teslim Edildi' : (parcel.status === 'Cancelled' ? 'İptal Edildi' : parcel.status) }}
+                                </span>
+                            </small>
+                        </div>
+                        <p class="mb-1">
+                            <i class="fas fa-map-marker-alt text-danger me-1"></i><strong>Alım:</strong> {{ parcel.cargoPickupLocation || 'Belirtilmemiş' }} <br>
+                            <i class="fas fa-map-pin text-success me-1"></i><strong>Teslimat:</strong> {{ parcel.cargoDeliveryLocation || 'Belirtilmemiş' }}
+                        </p>
+                         <p class="mb-1" *ngIf="parcel.senderName">
+                            <i class="fas fa-user me-1"></i><strong>Gönderen:</strong> {{ parcel.senderName }}
+                             <span *ngIf="parcel.senderContactInfo">({{ parcel.senderContactInfo }})</span>
+                        </p>
+                         <p class="mb-1" *ngIf="parcel.receiverName">
+                            <i class="fas fa-user-tag me-1"></i><strong>Alıcı:</strong> {{ parcel.receiverName }}
+                             <span *ngIf="parcel.receiverContactInfo">({{ parcel.receiverContactInfo }})</span>
+                        </p>
+                        <p class="mb-1" *ngIf="parcel.paymentProposedFee != null">
+                            <i class="fas fa-coins me-1"></i><strong>Alınan Ücret:</strong> {{ parcel.paymentProposedFee | currency:'TRY':'symbol' }}
+                        </p>
+                        <small class="text-muted" *ngIf="parcel.updatedAt">
+                            <i class="far fa-calendar-check me-1"></i>
+                            {{ parcel.status === 'Delivered' ? 'Teslim Tarihi' : (parcel.status === 'Cancelled' ? 'İptal Tarihi' : 'Son Güncelleme') }}: 
+                            {{ parcel.updatedAt | date:'dd/MM/yyyy HH:mm' }}
+                        </small>
+                         <small class="text-muted d-block" *ngIf="parcel.createdAt && (!parcel.updatedAt || (parcel.status !== 'Delivered' && parcel.status !== 'Cancelled'))">
+                            <i class="far fa-calendar-alt me-1"></i>Talep Tarihi: {{ parcel.createdAt | date:'dd/MM/yyyy HH:mm' }}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4"> <!-- "Tamamlanan İşlerim"den sonra bir ayırıcı -->
+            
+            <!-- YENİ BÖLÜM: Gönderdiğim Kargolarım (Gönderici olarak) - AKTİVİTE SEKMESİNİN İÇİNE TAŞINDI -->
+            <h5 class="border-bottom pb-2 mt-5"><i class="fas fa-paper-plane me-2"></i>Gönderdiğim Kargolarım</h5>
+
+            <div *ngIf="isLoadingSentParcels" class="text-center my-3">
+                <div class="spinner-border text-info" role="status">
+                    <span class="visually-hidden">Gönderdiğiniz kargolar yükleniyor...</span>
+                </div>
+                <p class="mt-2">Gönderdiğiniz kargolar yükleniyor...</p>
+            </div>
+
+            <div *ngIf="sentParcelsError && !isLoadingSentParcels" class="alert alert-danger my-3">
+                <i class="fas fa-exclamation-triangle me-2"></i>{{ sentParcelsError }}
+            </div>
+
+            <div *ngIf="!isLoadingSentParcels && !sentParcelsError && mySentParcels.length === 0" class="alert alert-info my-3">
+                <i class="fas fa-info-circle me-2"></i>Henüz gönderdiğiniz bir kargo bulunmamaktadır.
+                 <p class="mt-2 mb-0">Yeni bir kargo talebi oluşturmak için <a routerLink="/cargo-request-create">buraya tıklayın</a>.</p>
+            </div>
+
+            <div *ngIf="!isLoadingSentParcels && !sentParcelsError && mySentParcels.length > 0">
+                <div class="list-group">
+                    <div *ngFor="let parcel of mySentParcels" class="list-group-item list-group-item-action flex-column align-items-start mb-3 shadow-sm rounded">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1 fw-bold text-info">{{ parcel.cargoDescription || 'Açıklama Yok' }}</h6>
+                            <small>Durum:
+                                <span class="badge" [ngClass]="{
+                                    'bg-success text-white': parcel.status === 'Delivered',
+                                    'bg-danger text-white': parcel.status === 'Cancelled',
+                                    'bg-warning text-dark': parcel.status === 'Accepted' || parcel.status === 'PendingCarrier',
+                                    'bg-primary text-white': parcel.status === 'InTransit',
+                                    'bg-info text-white': parcel.status === 'Pending',
+                                    'bg-secondary text-white': !['Delivered', 'Cancelled', 'Accepted', 'PendingCarrier', 'InTransit', 'Pending'].includes(parcel.status)
+                                }">
+                                    {{ getStatusDisplayName(parcel.status) }}
+                                </span>
+                            </small>
+                        </div>
+                        <p class="mb-1">
+                            <i class="fas fa-map-marker-alt text-danger me-1"></i><strong>Alım:</strong> {{ parcel.cargoPickupLocation || 'Belirtilmemiş' }} <br>
+                            <i class="fas fa-map-pin text-success me-1"></i><strong>Teslimat:</strong> {{ parcel.cargoDeliveryLocation || 'Belirtilmemiş' }}
+                        </p>
+                        <p class="mb-1" *ngIf="parcel.receiverName">
+                            <i class="fas fa-user-tag me-1"></i><strong>Alıcı:</strong> {{ parcel.receiverName }}
+                             <span *ngIf="parcel.receiverContactInfo">({{ parcel.receiverContactInfo }})</span>
+                        </p>
+                        <p class="mb-1" *ngIf="parcel.carrierUser?.userName">
+                            <i class="fas fa-truck me-1"></i><strong>Taşıyıcı:</strong> {{ parcel.carrierUser.userName }}
+                            <span *ngIf="parcel.carrierUser?.phoneNumber"> ({{ parcel.carrierUser.phoneNumber }})</span>
+                        </p>
+                        <p class="mb-1" *ngIf="parcel.paymentProposedFee != null">
+                            <i class="fas fa-coins me-1"></i><strong>Teklif Edilen Ücret:</strong> {{ parcel.paymentProposedFee | currency:'TRY':'symbol' }}
+                        </p>
+                        <small class="text-muted" *ngIf="parcel.createdAt"><i class="far fa-calendar-alt me-1"></i>Talep Tarihi: {{ parcel.createdAt | date:'dd/MM/yyyy HH:mm' }}</small>
+                        <small class="text-muted d-block" *ngIf="parcel.updatedAt && parcel.createdAt !== parcel.updatedAt"><i class="far fa-calendar-check me-1"></i>Son Güncelleme: {{ parcel.updatedAt | date:'dd/MM/yyyy HH:mm' }}</small>
+                        
+                        <div *ngIf="(parcel.status === 'Pending' || parcel.status === 'PendingCarrier') && !parcel.carrierUserId" class="mt-3 d-flex justify-content-end">
+                            <!-- parcel.carrierUserId backend modelinize göre değişebilir (örn: parcel.carrierId, parcel.carrierUser?.id vb.) -->
+                            <button class="btn btn-sm btn-outline-danger" (click)="cancelMySentParcel(parcel.id)" [disabled]="isLoadingSentParcels">
+                                <i class="fas fa-times-circle me-1"></i> Talebi İptal Et
+                            </button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Aktivite Sekmesi Bitişi -->
+        
+        <!-- Ayarlar Sekmesi Başlangıcı -->
         <div class="tab-pane fade" [class.show]="activeTab === 'settings'" [class.active]="activeTab === 'settings'">
             <h4 class="mb-4">Profil Ayarları</h4>
             
@@ -393,7 +372,7 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div> <!-- tab-content kapanışı -->
 </main>
 
 <!-- Footer -->

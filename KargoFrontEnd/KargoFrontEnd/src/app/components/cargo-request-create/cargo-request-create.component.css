@@ -1,4 +1,16 @@
 /* Genel sayfa ve kart teması */
+.shared-background-theme {
+  background: linear-gradient(rgba(0, 48, 73, 0.9), rgba(0, 48, 73, 0.7));
+  background-size: cover; /* Arka planın tüm alanı kaplamasını sağlar */
+  min-height: 100vh; /* Minimum yüksekliği ekran yüksekliği kadar yapar */
+  display: flex; /* İçeriği (bu durumda <main> elementi) ortalamak için flexbox kullanır */
+  align-items: flex-start; /* İçeriği dikeyde üste yaslar (login.css .outer gibi) */
+  justify-content: center; /* İçeriği yatayda ortalar */
+  padding-top: 50px; /* login.css .outer gibi üstten boşluk */
+  padding-bottom: 50px; /* Alttan da boşluk ekleyerek uzun içeriklerde kaydırmayı iyileştirir */
+  box-sizing: border-box/* Bu satır sayfanın tamamını kaplaması için kalabilir veya kaldırılabilir */
+}
+
 .cargo-form-theme .card {
   background-color: #003a59; /* Koyu tema kart arkaplanı */
   border: none;

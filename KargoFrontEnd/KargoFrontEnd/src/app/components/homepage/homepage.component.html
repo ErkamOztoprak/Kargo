@@ -13,7 +13,7 @@
                         url('https://example.com/students-helping.jpg');
             background-size: cover;
             color: white;
-            padding: 100px 0;
+            padding: 50px 0;
         }
         
         .role-card {
@@ -33,27 +33,27 @@
         
         .student-avatar {
             width: 60px;
-            height: 60px;
+            height: auto;
             object-fit: cover;
         }
+        
+        
+        
     </style>
 </head>
 <body>
 
-<!-- Navigation -->
-<!-- Navigation with Dropdown -->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand text-custom-primary fw-bold" href="#">
-            <img [src]="logoPath" alt="logo" class="navbar-logo me-2">
+            <img [src]="logoPath" alt="logo" class="navbar-logo">
             
         </a>
         <div class="d-flex align-items-center gap-3">
-            <!-- Existing Buttons -->
-            <a href="#owner" class="btn btn-outline-primary text-light">Yardım Lazım</a>
-            <a href="#helper" class="btn btn-primary text-light">Yardım Edebilirim</a>
+            
             <div *ngIf="userName; else guest">
-                <!-- Profile Dropdown -->
+               
                 <div class="dropdown">
                     <a class="btn btn-link text-light text-decoration-none dropdown-toggle" 
                     href="#" role="button" data-bs-toggle="dropdown">
@@ -64,7 +64,7 @@
                         <li><a class="dropdown-item" href="/profile">
                             <i class="fas fa-user me-2"></i>Profilim
                         </a></li>
-                        <li><a class="dropdown-item" href="/ayarlar">
+                        <li><a class="dropdown-item" [routerLink]="['/profile']" [queryParams]="{ tab: 'settings'}">
                             <i class="fas fa-cog me-2"></i>Ayarlar
                         </a></li>
                         <li><hr class="dropdown-divider"></li>
@@ -82,7 +82,7 @@
     </div>
 </nav>
 
-<!-- Hero Section -->
+
 <section class="hero-section bg-custom-primary">
     <div class="container text-center">
         <h1 class="display-4 mb-4 fw-bold">Yurtify, Kargo Hizmetiniz</h1>
@@ -104,7 +104,7 @@
                         <i class="fas fa-hands-helping fa-3x text-custom-primary mb-3"></i>
                         <h3>Öğrenci Yardımcılar</h3>
                         <p>Kampüs içi kargo taşıyarak para kazanın</p>
-                        <button class="btn btn-primary w-100">Yardımcı Ol</button>
+                        <button class="btn btn-primary w-100" (click)="scrollToAktifListelemeler()">Yardımcı Ol</button>
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
     </div>
 </section>
 
-<!-- Nasıl Çalışır? -->
+
 <section class="py-5 bg-light">
     <div class="container">
         <h2 class="text-center mb-5">Nasıl Çalışır?</h2>
@@ -142,41 +142,89 @@
     </div>
 </section>
 
-<!-- Açık İstekler -->
-<section class="py-5">
+
+<section class="py-5" id="aktif-listelemeler">
     <div class="container">
-        <h2 class="mb-4">Açık Teslimat İstekleri</h2>
-        <div class="row g-4">
-            <!-- Talep Kartı -->
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <div class="card-body">
+        <h2 class="mb-4 text-center">Açık Teslimat İstekleri</h2>
+
+        
+        <div *ngIf="isLoadingCargoRequests" class="text-center">
+            <p>Kargo istekleri yükleniyor...</p>
+            
+        </div>
+        
+        <div *ngIf="cargoRequestsError && !isLoadingCargoRequests" class="alert alert-danger">
+            {{ cargoRequestsError }}
+        </div>
+
+
+        <div *ngIf="!isLoadingCargoRequests && !cargoRequestsError && openCargoRequests.length === 0" class="alert alert-info text-center">
+            Şu anda açık teslimat isteği bulunmamaktadır.
+        </div>
+
+        <!-- Kargo Listesi -->
+        <div *ngIf="!isLoadingCargoRequests && !cargoRequestsError && openCargoRequests.length > 0" class="row g-4">
+            <!-- Dinamik Talep Kartı -->
+            <div *ngFor="let request of openCargoRequests" class="col-md-4 d-flex">
+                <div class="card h-100 w-100">
+                    <div class="card-body d-flex flex-column">
+                        <!-- ... Kartın mevcut içeriği (başlık, açıklama, gönderen vb.) ... -->
                         <div class="d-flex justify-content-between mb-3">
-                            <span class="badge bg-custom-primary">Küçük Paket</span>
-                            <span class="text-muted">₺200-₺300</span>
+                            <span class="badge bg-custom-primary">{{ request.status || 'Paket' }}</span>
+                            <span class="text-muted" *ngIf="request.paymentProposedFee != null">{{ request.paymentProposedFee | currency:'TRY':'symbol' }}</span>
                         </div>
-                        <h5>Ders kitaplarını kampüse taşıma</h5>
-                        <p class="text-muted">Kütüphaneden Yurt A'ya</p>
-                        <div class="d-flex align-items-center mt-3">
-                            <img src="https://example.com/user1.jpg" alt="Kullanıcı" class="student-avatar rounded-circle me-2">
+                        <h5 class="card-title">{{ request.cargoDescription || 'Açıklama Yok' }}</h5>
+                        <p class="text-muted card-text mb-auto">
+                            <i class="fas fa-map-marker-alt me-1"></i> {{ request.cargoPickupLocation || 'Belirtilmemiş' }}
+                            <i class="fas fa-long-arrow-alt-right mx-1"></i>
+                            <i class="fas fa-map-marker-alt me-1"></i> {{ request.cargoDeliveryLocation || 'Belirtilmemiş' }}
+                        </p>
+                        <div class="d-flex align-items-center mt-3 pt-3 border-top">
+                            <i class="fas fa-user-circle fa-2x text-secondary me-2"></i>
                             <div>
                                 <small>Gönderen:</small>
-                                <div class="fw-bold">Ahmet Y.</div>
+                                <div class="fw-bold">{{ request.requestedByUser?.userName || (request.requestedByUser?.firstName + ' ' + request.requestedByUser?.lastName) || request.senderName || 'Bilinmiyor' }}</div>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer bg-white">
-                        <button class="btn btn-outline-primary w-100">Detayları Gör</button>
+                        <!-- Detayları Gör butonu toggleDetails metodunu çağıracak -->
+                        <button (click)="toggleDetails(request.id)" class="btn btn-outline-primary w-100">
+                            {{ selectedCargoId === request.id ? 'Detayları Gizle' : 'Detayları Gör' }}
+                        </button>
+                    </div>
+
+                    <!-- Satır İçi Detay Bölümü (Kartın hemen altında) -->
+                    <div *ngIf="selectedCargoId === request.id" class="inline-details p-3 border-top bg-light">
+                        <h6 class="mb-3">Ek Detaylar:</h6>
+                        <p *ngIf="request.trackingNumber"><strong>Takip No:</strong> {{ request.trackingNumber }}</p>
+                        <p *ngIf="request.cargoSpecialInstructions"><strong>Özel Talimatlar:</strong> {{ request.cargoSpecialInstructions }}</p>
+                        <p *ngIf="request.senderName"><strong>Gönderen Adı (Detay):</strong> {{ request.senderName }}</p>
+                        <p *ngIf="request.senderContactInfo"><strong>Gönderen İletişim:</strong> {{ request.senderContactInfo }}</p>
+                        <p *ngIf="request.receiverName"><strong>Alıcı Adı:</strong> {{ request.receiverName }}</p>
+                        <p *ngIf="request.receiverContactInfo"><strong>Alıcı İletişim:</strong> {{ request.receiverContactInfo }}</p>
+                        <p *ngIf="request.createdAt"><strong>Oluşturulma:</strong> {{ request.createdAt | date:'dd/MM/yyyy HH:mm' }}</p>
+                        
+                        <!-- Kargoyu Alma Butonu -->
+                        <div *ngIf="request.status === 'Pending' && request.requestedByUser?.id !== currentUserId" class="mt-3">
+                            <button (click)="acceptCargoRequest(request.id)" class="btn btn-success w-100">
+                                <i class="fas fa-hand-holding-heart me-2"></i>Kargoyu Al
+                            </button>
+                        </div>
+                        <div *ngIf="request.requestedByUser?.id === currentUserId" class="alert alert-sm alert-info mt-2 mb-0">
+                            Bu sizin oluşturduğunuz bir kargo talebi.
+                        </div>
+                        <div *ngIf="request.status !== 'Pending' && request.requestedByUser?.id !== currentUserId" class="alert alert-sm alert-warning mt-2 mb-0">
+                            Bu kargo şu anda alınabilir durumda değil (Durum: {{request.status}}).
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Daha fazla talep kartı eklenebilir -->
         </div>
     </div>
 </section>
 
-<!-- Neden Biz? -->
+
 <section class="py-5 bg-custom-primary text-white">
     <div class="container">
         <div class="row g-4">

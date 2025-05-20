@@ -44,7 +44,7 @@ namespace KargoUygulamasiBackEnd.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("logusers");
+                    b.ToTable("logusers", (string)null);
                 });
 
             modelBuilder.Entity("KargoBackEnd.Models.Notification", b =>
@@ -71,7 +71,7 @@ namespace KargoUygulamasiBackEnd.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("notifications");
+                    b.ToTable("notifications", (string)null);
                 });
 
             modelBuilder.Entity("KargoBackEnd.Models.User", b =>
@@ -129,8 +129,10 @@ namespace KargoUygulamasiBackEnd.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -159,6 +161,14 @@ namespace KargoUygulamasiBackEnd.Migrations
                     b.Property<int>("ConfirmedByUserId")
                         .HasColumnType("int");
 
+                    b.Property<string>("EventType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ParcelId")
                         .HasColumnType("int");
 
@@ -176,7 +186,7 @@ namespace KargoUygulamasiBackEnd.Migrations
 
                     b.HasIndex("VerifiedByAdminId");
 
-                    b.ToTable("deliverylogs");
+                    b.ToTable("deliverylogs", (string)null);
                 });
 
             modelBuilder.Entity("KargoUygulamasiBackEnd.Models.Parcel", b =>
@@ -187,27 +197,70 @@ namespace KargoUygulamasiBackEnd.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("ArrivalTime")
+                    b.Property<DateTime?>("ArrivalTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("AssignedToUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CargoDeliveryLocation")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("CargoDescription")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("CargoPickupLocation")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("CargoSpecialInstructions")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("QrExpiresAt")
+                    b.Property<decimal?>("PaymentProposedFee")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<DateTime?>("QrExpiresAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("QrToken")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ReceiverContactInfo")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("ReceiverName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("RequestedByUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SenderContactInfo")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("SenderName")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("TrackingNumber")
                         .HasMaxLength(50)
@@ -218,7 +271,11 @@ namespace KargoUygulamasiBackEnd.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("parcels");
+                    b.HasIndex("AssignedToUserId");
+
+                    b.HasIndex("RequestedByUserId");
+
+                    b.ToTable("parcels", (string)null);
                 });
 
             modelBuilder.Entity("KargoBackEnd.Models.LogUser", b =>
@@ -226,7 +283,6 @@ namespace KargoUygulamasiBackEnd.Migrations
                     b.HasOne("KargoBackEnd.Models.User", "User")
                         .WithMany("LogUser")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -257,7 +313,8 @@ namespace KargoUygulamasiBackEnd.Migrations
 
                     b.HasOne("KargoBackEnd.Models.User", "VerifiedByAdmin")
                         .WithMany()
-                        .HasForeignKey("VerifiedByAdminId");
+                        .HasForeignKey("VerifiedByAdminId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("ConfirmedBy");
 
@@ -266,13 +323,35 @@ namespace KargoUygulamasiBackEnd.Migrations
                     b.Navigation("VerifiedByAdmin");
                 });
 
+            modelBuilder.Entity("KargoUygulamasiBackEnd.Models.Parcel", b =>
+                {
+                    b.HasOne("KargoBackEnd.Models.User", "AssignedToUser")
+                        .WithMany("AssignedParcelsToDeliver")
+                        .HasForeignKey("AssignedToUserId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("KargoBackEnd.Models.User", "RequestedByUser")
+                        .WithMany("RequestedParcels")
+                        .HasForeignKey("RequestedByUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("AssignedToUser");
+
+                    b.Navigation("RequestedByUser");
+                });
+
             modelBuilder.Entity("KargoBackEnd.Models.User", b =>
                 {
+                    b.Navigation("AssignedParcelsToDeliver");
+
                     b.Navigation("DeliveryLogs");
 
                     b.Navigation("LogUser");
 
                     b.Navigation("Notification");
+
+                    b.Navigation("RequestedParcels");
                 });
 
             modelBuilder.Entity("KargoUygulamasiBackEnd.Models.Parcel", b =>

@@ -1,7 +1,7 @@
 ﻿using KargoBackEnd.Context;
 using KargoBackEnd.Models;
+using KargoUygulamasiBackEnd.DTOs;
 using KargoUygulamasiBackEnd.Helpers;
-using KargoUygulamasiBackEnd.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -181,7 +181,11 @@ namespace KargoUygulamasiBackEnd.Controller
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.Name, user.UserName)
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.GivenName, user.FirstName),
+                new Claim(ClaimTypes.Surname,user.LastName),
+                new Claim(ClaimTypes.Email, user.Email),
+                
             };
 
             if (!string.IsNullOrEmpty(user.Role))

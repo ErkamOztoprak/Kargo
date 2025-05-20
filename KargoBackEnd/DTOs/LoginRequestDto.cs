@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Reflection.Metadata;
 
-namespace KargoUygulamasiBackEnd.Models
+namespace KargoUygulamasiBackEnd.DTOs
 {
     public class LoginRequestDto
     {

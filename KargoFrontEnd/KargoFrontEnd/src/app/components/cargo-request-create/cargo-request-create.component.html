@@ -1,6 +1,7 @@
-<main class="container my-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-10 cargo-form-theme"> <!-- Genişliği biraz azalttık -->
+<div class="shared-background-theme">
+<main class="container my-5 ">
+    <div class="row justify-content-center ">
+        <div class="col-lg-8 col-md-10 cargo-form-theme"> 
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title mb-0 text-center">Yeni Kargo Teslimat Talebi</h4>
@@ -8,15 +9,15 @@
                 <div class="card-body p-4">
                     <form #cargoRequestForm="ngForm" (ngSubmit)="submitCargoRequest(cargoRequestForm)">
 
-                        <!-- Gönderici Bilgileri (Genellikle mevcut kullanıcı olur, ama formda da gösterilebilir) -->
+                       
                         <h5 class="mt-2 mb-3 section-title">Gönderici Bilgileri</h5>
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label for="senderName" class="form-label">Ad Soyad (Gönderen)</label>
                             <input type="text" class="form-control" id="senderName" name="senderName" [(ngModel)]="requestData.sender.name" required #senderNameInput="ngModel" placeholder="Adınız Soyadınız">
                             <div *ngIf="senderNameInput.invalid && (senderNameInput.dirty || senderNameInput.touched)" class="text-danger mt-1 small">
                                 Gönderici adı gereklidir.
                             </div>
-                        </div>
+                        </div> -->
                         <div class="mb-3">
                             <label for="senderContact" class="form-label">İletişim (Oda No/Telefon)</label>
                             <input type="text" class="form-control" id="senderContact" name="senderContact" [(ngModel)]="requestData.sender.contactInfo" required #senderContactInput="ngModel" placeholder="Yurt Oda No veya Telefon">
@@ -25,24 +26,24 @@
                             </div>
                         </div>
 
-                        <!-- Alıcı Bilgileri Bölümü -->
+                       
                         <h5 class="mt-4 mb-3 section-title">Alıcı Bilgileri</h5>
                         <div class="mb-3">
                             <label for="receiverName" class="form-label">Ad Soyad (Alıcı)</label>
-                            <input type="text" class="form-control" id="receiverName" name="receiverName" [(ngModel)]="requestData.receiver.name" required #receiverNameInput="ngModel" placeholder="Kargonun Sahibi">
+                            <input type="text" class="form-control" id="receiverName" name="receiverName" [(ngModel)]="requestData.receiver.name" required #receiverNameInput="ngModel" placeholder="Kargoyu teslim alacak kişinin adı soyadı">
                             <div *ngIf="receiverNameInput.invalid && (receiverNameInput.dirty || receiverNameInput.touched)" class="text-danger mt-1 small">
                                 Alıcı adı gereklidir.
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="receiverContact" class="form-label">Alıcı İletişim (Oda No/Telefon)</label>
-                            <input type="text" class="form-control" id="receiverContact" name="receiverContact" [(ngModel)]="requestData.receiver.contactInfo" required #receiverContactInput="ngModel" placeholder="Alıcının Yurt Oda No veya Telefonu">
+                            <input type="text" class="form-control" id="receiverContact" name="receiverContact" [(ngModel)]="requestData.receiver.contactInfo" required #receiverContactInput="ngModel" placeholder="Teslim alacak kişinin oda no veya telefonu">
                             <div *ngIf="receiverContactInput.invalid && (receiverContactInput.dirty || receiverContactInput.touched)" class="text-danger mt-1 small">
                                 Alıcı iletişim bilgisi gereklidir.
                             </div>
                         </div>
 
-                        <!-- Kargo Detayları Bölümü -->
+                       
                         <h5 class="mt-4 mb-3 section-title">Kargo Detayları</h5>
                         <div class="mb-3">
                             <label for="cargoDescription" class="form-label">Kargo İçeriği / Açıklama</label>
@@ -51,7 +52,7 @@
                                 Kargo açıklaması gereklidir.
                             </div>
                         </div>
-                        <div class="mb-3"> <!-- Ağırlık ve boyutlar kaldırıldı -->
+                        <div class="mb-3"> 
                             <label for="pickupLocation" class="form-label">Kargonun Alınacağı Yer</label>
                             <input type="text" class="form-control" id="pickupLocation" name="pickupLocation" [(ngModel)]="requestData.cargo.pickupLocation" required #pickupLocationInput="ngModel" placeholder="Örn: A Blok Güvenlik, Kütüphane Emanet">
                              <div *ngIf="pickupLocationInput.invalid && (pickupLocationInput.dirty || pickupLocationInput.touched)" class="text-danger mt-1 small">
@@ -70,7 +71,7 @@
                             <textarea class="form-control" id="specialInstructions" name="specialInstructions" rows="2" [(ngModel)]="requestData.cargo.specialInstructions" placeholder="Örn: Gelmeden önce ara, Akşam 6'dan sonra teslim alabilirim."></textarea>
                         </div>
                         
-                        <!-- Ödeme/Ücret Bilgisi (Eğer bu hizmet için bir ücret olacaksa) -->
+                        
                         <div class="mb-3">
                             <label for="proposedFee" class="form-label">Teslimat İçin Önerilen Ücret (₺ - Opsiyonel)</label>
                             <input type="number" class="form-control" id="proposedFee" name="proposedFee" [(ngModel)]="requestData.payment.proposedFee" min="0" step="1" placeholder="0">
@@ -78,7 +79,11 @@
 
                         <!-- Buton -->
                         <div class="text-center mt-4 pt-2">
-                            <button type="submit" class="btn btn-primary btn-lg px-5" [disabled]="!cargoRequestForm.form.valid">Teslimat Talebi Oluştur</button>
+                            <button type="submit" class="btn btn-primary btn-lg px-5" [disabled]="cargoRequestForm.form.invalid || isLoading">Teslimat Talebi Oluştur
+                                <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <span *ngIf="!isLoading">Kargo Talebi Oluştur</span>    
+                                <span *ngIf="isLoading"> Gönderiliyor...</span>
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -86,3 +91,4 @@
         </div>
     </div>
 </main>
+</div>

@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
 import {HttpClient,HttpHeaders} from "@angular/common/http";
-import { Observable } from 'rxjs';
+import { first, Observable } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 
+export interface UserProfile {
+  id: string | null;
+  username: string | null;
+  firstName: string | null;
+  lastName: string | null;
+  email: string | null;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +18,36 @@ export class AuthService {
   forgotPassword(email: any): Observable<{token?:string}> {
     throw new Error('Method not implemented.');
   }
+
   
   getUserProfile(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}profile`);
   }
+
+  getUserName(): string | null {
+    const currentUser =this.getCurrentUser();
+    return currentUser ? currentUser.username : null;
+  }
+  getCurrentUser(): UserProfile | null {
+    const token = this.getToken();
+    if(token){
+      try{
+        const decodedToken:any =jwtDecode(token);
+        return{
+          id: decodedToken.sub|| null,
+          username: decodedToken.name || decodedToken.unique_name || null,
+          firstName: decodedToken.given_name || null,
+          lastName: decodedToken.family_name || null,
+          email: decodedToken.email || null,
+        }
+      }catch(error){
+        console.error('Token decoding failed:', error);
+        return null;
+      }
+    }
+    return null;
+  }
+  
   updateUserProfile(profileData: any): Observable<any>{
     return this.http.put<any>(`${this.baseUrl}profile/update`, profileData);
   }
@@ -34,7 +68,7 @@ export class AuthService {
     }
   }
   getToken(): string | null {
-    return localStorage.getItem('token'); // Ensure 'token' is the correct key
+    return localStorage.getItem('token'); 
   }
   logout(): void{
     localStorage.removeItem('token');
@@ -42,12 +76,11 @@ export class AuthService {
     
   }
   isAuthenticated(): boolean {
-    const token = localStorage.getItem('token'); // Doğrudan localStorage.getItem kullanın
+    const token = localStorage.getItem('token'); 
     console.log('AuthService.isAuthenticated() called.');
     console.log('Raw token from localStorage:', token);
-    console.log('Type of token:', typeof token); // Token'ın tipini kontrol edin
+    console.log('Type of token:', typeof token); 
     
-    // Token'ın gerçekten dolu bir string olup olmadığını daha dikkatli kontrol edin
     const isAuthenticatedResult = (typeof token === 'string' && token.trim() !== ''); 
     
     console.log('IsAuthenticated result (detailed check):', isAuthenticatedResult);

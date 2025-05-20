@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControl } from '@angular/forms';
 import ValidateForm from '../../helpers/validateForm';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -20,7 +21,7 @@ export class SignupComponent {
   eyeIcon: String = "fa-eye-slash";
   signUpForm!: FormGroup;
   logoPath = 'assets/images/logo.png'
-  constructor(private fb: FormBuilder, private auth: AuthService) { }
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.signUpForm = this.fb.group({
@@ -49,7 +50,7 @@ export class SignupComponent {
     }
   }
 
-  // Her iki şifre alanını da aynı anda değiştirmek için
+  
   hideShowPass() {
     this.isText = !this.isText;
     this.isText ? this.eyeIcon = "fa-eye" : this.eyeIcon = "fa-eye-slash";
@@ -69,10 +70,21 @@ export class SignupComponent {
         password: this.signUpForm.value.password
       };
 
-      // Burada API'ye kayıt isteğini gönder
-      // this.authService.signup(signupData).subscribe({...})
+      this.auth.signup(signupData).subscribe({
+        next:(response)=>{
+          console.log('Kayit Basarili',response);
+          this.message = 'Kayit Basarili! Giris Yapabilirsiniz';
+          this.isError = false;
+          this.signUpForm.reset();
+          
+          this.router.navigate(['/login']);
+
+        }
+      })
     } else {
       this.validateAllFormFields(this.signUpForm);
+      this.message = 'Lutfen Formu Doldurunuz';
+      this.isError = true;
     }
   }
 

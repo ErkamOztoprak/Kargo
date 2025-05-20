@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace KargoUygulamasiBackEnd.Models
+namespace KargoUygulamasiBackEnd.DTOs
 {
-    public class ProfileUpdateDto
+    public class RegisterRequestDto
     {
         [Required]
         [MaxLength(50)]
@@ -13,11 +13,19 @@ namespace KargoUygulamasiBackEnd.Models
         public string LastName { get; set; }
 
         [Required]
+        [MaxLength(50)]
+        public string UserName { get; set; }
+
+        [Required]
         [EmailAddress]
+        [MaxLength(100)]
         public string Email { get; set; }
 
-        [Phone]
+        [MaxLength(20)]
         public string PhoneNumber { get; set; }
+
+        [Required]
+        [MinLength(8)]
+        public string Password { get; set; }
     }
 }
-

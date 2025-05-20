@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { CargoRequestService } from '../../services/cargo-request.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-profile',
@@ -27,7 +29,25 @@ export class ProfileComponent implements OnInit {
 
   activeTab: string = 'activity';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  myAcceptedParcels: any[] = [];
+  isLoadingAcceptedParcels: boolean = false;
+  acceptedParcelsError: string | null = null;
+
+  myCompletedParcels: any[] = [];
+  isLoadingCompletedParcels: boolean = false;
+  completedParcelsError: string | null = null;
+
+  mySentParcels: any[] = [];
+  isLoadingSentParcels: boolean = false;
+  sentParcelsError: string | null = null; 
+
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private cargoRequestService:CargoRequestService,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   logout(): void {
     this.authService.logout();
@@ -48,17 +68,114 @@ export class ProfileComponent implements OnInit {
           this.userName = userObject.userName;
         }
       } catch (e) {
-        // Hata durumunda sessiz kalabilir veya minimal bir log bırakılabilir
+   
       }
     }
-    
+
     this.fetchUserProfile(); 
+    this.loadMyAcceptedParcels();
+    this.loadMyCompletedParcels();
+    this.loadMySentParcels();
     
     const fragment = window.location.hash.replace('#', '');
     if (fragment && ['activity', 'reviews', 'settings'].includes(fragment)) {
       this.activeTab = fragment;
     }
+    
   }
+  loadMySentParcels(): void {
+  this.isLoadingSentParcels = true;
+  this.sentParcelsError = null;
+  this.mySentParcels = []; 
+
+  this.cargoRequestService.getMyCreatedParcels().subscribe({
+    next: (parcels) => {
+      this.mySentParcels = parcels;
+      this.isLoadingSentParcels = false;
+      this.cdr.detectChanges();
+    },
+    error: (err) => {
+      this.sentParcelsError = err.message || 'Gönderdiğiniz kargolar yüklenirken bir hata oluştu.';
+      this.isLoadingSentParcels = false;
+      console.error('Gönderdiğiniz kargolar yüklenirken hata:', err);
+      this.cdr.detectChanges();
+    }
+  });
+}
+  getStatusDisplayName(status: string): string {
+  switch (status) {
+    case 'Pending': return 'Beklemede';
+    case 'Accepted': return 'Taşıyıcı Atandı';
+    case 'PendingCarrier': return 'Taşıyıcı Bekleniyor';
+    case 'InTransit': return 'Yolda';
+    case 'Delivered': return 'Teslim Edildi';
+    case 'Cancelled': return 'İptal Edildi';
+    default: return status;
+  }
+}
+
+cancelMySentParcel(parcelId: number): void {
+    if (!confirm('Bu kargo talebini iptal etmek istediğinizden emin misiniz?')) {
+      return;
+    }
+
+    this.isLoadingSentParcels = true; 
+
+    this.cargoRequestService.cancelParcelRequest(parcelId).subscribe({
+      next: (response) => { 
+        alert(response?.message || 'Kargo talebi başarıyla iptal edildi.');
+        this.loadMySentParcels(); 
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        this.isLoadingSentParcels = false; 
+        alert(`İptal işlemi sırasında bir hata oluştu: ${err.error?.message || err.message || 'Bilinmeyen bir hata oluştu.'}`);
+        console.error('Kargo iptal edilirken hata:', err);
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  loadMyCompletedParcels(): void {
+    this.isLoadingCompletedParcels = true;
+    this.completedParcelsError = null;
+    this.cargoRequestService.getMyCompletedParcels().subscribe({
+      next: (parcels) => {
+        this.myCompletedParcels = parcels;
+        this.isLoadingCompletedParcels = false;
+      },
+      error: (err) => {
+        // Backend'den gelen spesifik hata mesajını göstermeye çalışalım
+        this.completedParcelsError = err.error?.message || err.message || 'Tamamlanan kargolar yüklenirken bir hata oluştu.';
+        this.isLoadingCompletedParcels = false;
+        console.error('Tamamlanan kargolar yüklenirken hata:', err);
+        if (err.status === 401 || err.status === 403) {
+            // fetchUserProfile zaten genel bir uyarı ve yönlendirme yapıyor.
+            // Bu nedenle burada ek bir alert veya yönlendirme genellikle gereksizdir.
+        }
+      }
+    });
+  }
+
+  markAsDelivered(parcelId: number): void {
+    if (!confirm('Bu kargoyu teslim ettiğinizi onaylıyor musunuz? Bu işlem geri alınamaz.')) {
+      return;
+    }
+    // İsteğe bağlı: Butonu geçici olarak devre dışı bırakabilir veya bir yükleniyor göstergesi ekleyebilirsiniz.
+    this.cargoRequestService.completeCargoDelivery(parcelId).subscribe({
+      next: (response) => {
+        alert(response?.message || 'Kargo başarıyla teslim edildi olarak işaretlendi!');
+        // Listeleri yenilemek için hem kabul edilenleri hem de tamamlananları tekrar yükle
+        this.loadMyAcceptedParcels(); 
+        this.loadMyCompletedParcels();
+      },
+      error: (err) => {
+        alert(`Hata: ${err.error?.message || err.message || 'Kargo teslim edildi olarak işaretlenemedi.'}`);
+        console.error('Kargo teslim etme hatası:', err);
+      }
+    });
+  }
+
 
   fetchUserProfile(): void { 
     this.authService.getUserProfile().subscribe({
@@ -99,6 +216,27 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
+
+  loadMyAcceptedParcels(): void {
+    this.isLoadingAcceptedParcels = true;
+    this.acceptedParcelsError = null;
+    this.cargoRequestService.getMyAcceptedParcels().subscribe({ 
+      next: (parcels) => {
+        this.myAcceptedParcels = parcels;
+        this.isLoadingAcceptedParcels = false;
+      },
+      error: (err) => {
+        this.acceptedParcelsError = err.message || 'Kabul edilen kargolar yüklenirken bir hata oluştu.';
+        this.isLoadingAcceptedParcels = false;
+        console.error('Kabul edilen kargolar yüklenirken hata:', err);
+        
+        if (err.status === 401 || err.status === 403) {
+             alert('Kargolarınızı görmek için lütfen tekrar giriş yapın.'); // fetchUserProfile zaten benzer bir uyarı veriyor
+            
+        }
+      }
+    });
+  }
   
   setActiveTab(tabName: string): void {
     this.activeTab = tabName;
@@ -116,8 +254,8 @@ export class ProfileComponent implements OnInit {
       next: (response) => {
         console.log('Profil güncelleme yanıtı:', response);
         alert(response?.message || 'Kişisel bilgileriniz başarıyla güncellendi!');
-        // İsteğe bağlı: Güncellenmiş veriyi tekrar çekebilir veya component özelliklerini yanıttan güncelleyebilirsiniz.
-        // this.fetchUserProfile(); // En güncel veriyi almak için
+        
+        // this.fetchUserProfile(); 
       },
       error: (err) => {
         console.error('Kişisel bilgiler güncellenirken hata oluştu:', err);

@@ -1,4 +1,4 @@
-﻿namespace KargoUygulamasiBackEnd.Models
+﻿namespace KargoUygulamasiBackEnd.DTOs
 {
         public class AuthenticateResponseDto
         {
