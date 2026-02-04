@@ -1,27 +1,31 @@
-# 📦 Kargo Teslim Web Uygulaması
+# Parcel Delivery Web Application
 
-**Problem:** Yurtlarda kargolar doğrudan içeri alınmadığı için öğrenciler kargolarını teslim almakta zorluk yaşıyor.  
-**Çözüm:** Bu proje, öğrencilerin kargolarını **güvenilir kişiler aracılığıyla** teslim alabilmesini sağlayan bir **ilan, takip ve güven sistemi** sunar.  
+**Problem:** Students struggle to receive their parcels because dormitories don't accept deliveries directly inside the building.
 
----
-
-## 🚀 Özellikler
-- Kullanıcı kayıt & giriş (JWT Authentication)  
-- Kargo teslim ilanı açma ve listeleme  
-- **Kargo takip ekranı** (aktif kargoların durumunu görme)  
-- **Trust Score**: kullanıcıların güven puanı metriği  
-- Güvenilir teslim edicilerin önerilmesi (puanlama sistemi)  
-- Kullanıcı profilinde güven puanı ve ilan geçmişi  
+**Solution:** This project provides a **listing, tracking, and trust system** that allows students to receive their parcels through **trusted couriers**.
 
 ---
 
-## 🛠 Teknolojiler
-- **Backend:** .NET 6, ASP.NET Core, Entity Framework Core, MSSQL, JWT, Swagger  
-- **Frontend:** Angular, TypeScript, Bootstrap  
+## Features
+
+- User registration & authentication (JWT Authentication)
+- Post and browse parcel delivery listings
+- **Parcel tracking dashboard** (monitor active parcel status)
+- **Trust Score**: user reliability metric
+- Trusted courier recommendations (rating system)
+- User profile with trust score and delivery history
 
 ---
 
-## ⚙️ Çalıştırma
+## Tech Stack
+
+- **Backend:** .NET 6, ASP.NET Core, Entity Framework Core, MSSQL, JWT, Swagger
+- **Frontend:** Angular, TypeScript, Bootstrap
+
+---
+
+## Getting Started
+
 ```bash
 # Backend
 dotnet restore
@@ -31,4 +35,4 @@ dotnet run   # http://localhost:5000/swagger
 # Frontend
 npm install
 ng serve     # http://localhost:4200
-
+```
